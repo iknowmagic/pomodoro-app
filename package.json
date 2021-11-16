@@ -2,11 +2,12 @@
   "name": "base-project",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "yarn install && vite",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "windi-analyze": "windicss-analysis",
-    "init-husky": "husky install"
+    "init-husky": "husky install",
+    "lint": "eslint --fix ./src/**/*.ts ./src/**/*.vue"
   },
   "dependencies": {
     "vite-plugin-windicss": "^1.5.1",
@@ -32,6 +33,8 @@
     "prettier": "^2.4.1",
     "typescript": "^4.4.3",
     "vite": "^2.6.4",
+    "vite-plugin-checker": "^0.3.4",
+    "vite-plugin-eslint": "^1.3.0",
     "vue-tsc": "^0.3.0",
     "windicss-analysis": "^0.3.4"
   },
