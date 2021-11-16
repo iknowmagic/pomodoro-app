@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "windi-analyze": "windicss-analysis",
+    "init-husky": "husky install"
   },
   "dependencies": {
     "vite-plugin-windicss": "^1.5.1",
@@ -12,10 +14,26 @@
     "windicss": "^3.2.1"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/eslint-config-standard": "^6.1.0",
+    "@vue/eslint-config-typescript": "^9.1.0",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.1.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-sonarjs": "^0.10.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "husky": "^7.0.4",
+    "prettier": "^2.4.1",
     "typescript": "^4.4.3",
     "vite": "^2.6.4",
-    "vue-tsc": "^0.3.0"
+    "vue-tsc": "^0.3.0",
+    "windicss-analysis": "^0.3.4"
   },
   "main": "index.js",
   "license": "MIT"
