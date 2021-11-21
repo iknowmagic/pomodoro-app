@@ -10,7 +10,12 @@ import { test } from '@/store'
 export default defineComponent({
   name: 'HelloWorld',
   setup() {
-    console.log('%cHelloWorld.vue line:13 test', 'color: #007acc;', test())
+    const testStore = test()
+    console.log(
+      '%cHelloWorld.vue line:13 test',
+      'color: #007acc;',
+      testStore.hello
+    )
   }
 })
 </script>
