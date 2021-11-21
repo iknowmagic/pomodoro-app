@@ -1,4 +1,5 @@
 import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import checker from 'vite-plugin-checker'
 import eslintPlugin from 'vite-plugin-eslint'
@@ -17,5 +18,10 @@ export default defineConfig({
         extensions: ['.ts']
       }
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src')
+    }
+  }
 })

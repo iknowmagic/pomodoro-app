@@ -10,11 +10,13 @@
     "lint": "eslint --fix ./src/**/*.ts ./src/**/*.vue"
   },
   "dependencies": {
+    "pinia": "^2.0.3",
     "vite-plugin-windicss": "^1.5.1",
     "vue": "^3.2.16",
     "windicss": "^3.2.1"
   },
   "devDependencies": {
+    "@types/node": "^16.11.7",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vitejs/plugin-vue": "^1.9.3",
