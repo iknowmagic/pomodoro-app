@@ -15,6 +15,7 @@
     "vite-plugin-linter": "^1.0.1",
     "vite-plugin-windicss": "^1.5.1",
     "vue": "^3.2.16",
+    "vue-router": "^4.0.12",
     "windicss": "^3.2.1"
   },
   "devDependencies": {

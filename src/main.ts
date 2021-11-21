@@ -4,6 +4,7 @@ import 'virtual:windi.css'
 
 import store from '@/store'
 
-import App from './App.vue'
+import App from '@/App.vue'
+import router from '@/router'
 
-createApp(App).use(store).mount('#app')
+createApp(App).use(router).use(store).mount('#app')
