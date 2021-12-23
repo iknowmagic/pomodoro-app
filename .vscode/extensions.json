@@ -1,3 +1,37 @@
 {
-  "recommendations": ["johnsoncodehk.volar"]
+  "recommendations": [
+    "johnsoncodehk.volar",
+    "wmaurer.change-case",
+    "alexkev.clg",
+    "streetsidesoftware.code-spell-checker",
+    "kamikillerto.vscode-colorize",
+    "kisstkondoros.vscode-codemetrics",
+    "mrmlnc.vscode-duplicate",
+    "inu1255.easy-snippet",
+    "editorconfig.editorconfig",
+    "irongeek.vscode-env",
+    "dbaeumer.vscode-eslint",
+    "donjayamanne.githistory",
+    "eamodio.gitlens",
+    "ecmel.vscode-html-css",
+    "compulim.indent4to2",
+    "tkrkt.linenote",
+    "xyz.local-history",
+    "esbenp.prettier-vscode",
+    "uyiosa-enabulele.reopenclosedtab",
+    "syler.sass-indented",
+    "sonarsource.sonarlint-vscode",
+    "zengxingxin.sort-js-object-keys",
+    "richie5um2.vscode-sort-json",
+    "stylelint.vscode-stylelint",
+    "jgclark.vscode-todo-highlight",
+    "gruntfuggly.todo-tree",
+    "wheatjs.vueuse",
+    "voorjaar.windicss-intellisense",
+    "visualstudioexptteam.vscodeintellicode",
+    "pkief.material-icon-theme",
+    "formulahendry.terminal",
+    "vincaslt.highlight-matching-tag",
+    "coenraads.bracket-pair-colorizer"
+  ]
 }
