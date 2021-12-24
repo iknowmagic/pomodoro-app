@@ -1,5 +1,17 @@
 {
   "workbench.colorCustomizations": {
     "tab.unfocusedActiveBorder": "#fff0"
-  }
+  },
+  "activitusbar.views": [
+    {
+      "name": "command.git.viewHistory",
+      "codicon": "history",
+      "tooltip": "Git View History"
+    },
+    {
+      "name": "command.workbench.action.reloadWindow",
+      "codicon": "refresh",
+      "tooltip": "Reload Window"
+    }
+  ]
 }

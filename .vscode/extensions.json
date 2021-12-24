@@ -32,6 +32,7 @@
     "pkief.material-icon-theme",
     "formulahendry.terminal",
     "vincaslt.highlight-matching-tag",
-    "coenraads.bracket-pair-colorizer"
+    "coenraads.bracket-pair-colorizer",
+    "gruntfuggly.activitusbar"
   ]
 }
