@@ -33,6 +33,7 @@
     "formulahendry.terminal",
     "vincaslt.highlight-matching-tag",
     "coenraads.bracket-pair-colorizer",
-    "gruntfuggly.activitusbar"
+    "gruntfuggly.activitusbar",
+    "burcadoruciprian.simple-search"
   ]
 }
