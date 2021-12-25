@@ -3,9 +3,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 
+import api from '@/services'
 import { test } from '@/store'
+
+import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'HelloWorld',
@@ -16,6 +19,23 @@ export default defineComponent({
       'color: #007acc;',
       testStore.hello
     )
+
+    const route = useRoute()
+    route.meta = { title: 'Test' }
+    console.log(
+      '%cHelloWorld.vue line:24 route',
+      'color: #007acc;',
+      route.meta
+    )
+
+    const getData = async () => {
+      const { data: result } = await api.test.getData()
+      console.log('%cHelloWorld.vue line:23 result', 'color: #007acc;', result)
+    }
+
+    onMounted(() => {
+      getData()
+    })
   }
 })
 </script>
