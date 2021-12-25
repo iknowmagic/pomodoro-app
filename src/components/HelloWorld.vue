@@ -8,7 +8,7 @@ import { defineComponent, onMounted } from 'vue'
 import api from '@/services'
 import { test } from '@/store'
 
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
   name: 'HelloWorld',
