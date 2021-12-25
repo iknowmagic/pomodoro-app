@@ -15,11 +15,10 @@ module.exports = {
 
         // Packages.
         // App Items
-        ['^lodash'],
-        ['^uniqid', '^moment', '^alasql'],
+        ['^@vueuse', '^lodash', '^dayjs'],
+        ['^uniqid', '^alasql'],
         ['^@/services', 'pinia', '@/store'],
         ['^@/helpers'],
-        ['^devextreme-vue'],
 
         // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
         ['^@?\\w'],
