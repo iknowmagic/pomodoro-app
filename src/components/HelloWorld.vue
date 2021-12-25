@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <h1 class="pt-20">Hello Cypress!</h1>
 </template>
 
 <script lang="ts">
