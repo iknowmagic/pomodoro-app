@@ -10,7 +10,8 @@
     "lint": "eslint --fix ./src/**/*.ts ./src/**/*.vue",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "test": "cypress open-ct"
+    "test": "cypress open-ct",
+    "component": "plop component"
   },
   "dependencies": {
     "@vueuse/core": "^7.4.1",
