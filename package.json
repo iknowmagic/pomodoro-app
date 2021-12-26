@@ -6,7 +6,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "windi-analyze": "windicss-analysis",
-    "init-husky": "husky install",
+    "husky-init": "husky install",
     "lint": "eslint --fix ./src/**/*.ts ./src/**/*.vue",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
