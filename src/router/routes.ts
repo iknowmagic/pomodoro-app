@@ -1,5 +1,5 @@
 import MainLayout from '@/layouts/MainLayout.vue'
-import Home from '@/pages/Home.vue'
+import MainPage from '@/pages/MainPage'
 import NotFound from '@/pages/NotFound.vue'
 
 export default [
@@ -9,8 +9,8 @@ export default [
     children: [
       {
         path: '',
-        name: 'Home',
-        component: Home,
+        name: 'MainPage',
+        component: MainPage,
         meta: {
           title: 'Welcome'
         }

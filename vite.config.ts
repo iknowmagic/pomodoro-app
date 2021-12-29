@@ -21,19 +21,21 @@ export default defineConfig({
         title: process.env.VITE_APP_TITLE,
         base: process.env.VITE_APP_BASE,
         fonts: `
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Kumbh+Sans:wght@400;700&family=Roboto+Slab:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
         `
       }
     }),
-    eslintPlugin(),
-    checker({
-      vueTsc: true,
-      typescript: true,
-      eslint: {
-        files: ['./src'],
-        extensions: ['.ts', '.vue']
-      }
-    })
+    eslintPlugin()
+    // checker({
+    //   vueTsc: true,
+    //   typescript: true,
+    //   eslint: {
+    //     files: ['./src'],
+    //     extensions: ['.ts', '.vue']
+    //   }
+    // })
   ],
   build: {
     rollupOptions: {

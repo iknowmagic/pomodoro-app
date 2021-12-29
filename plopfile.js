@@ -26,11 +26,11 @@ module.exports = plop => {
         path: 'src/components/{{name}}/index.ts',
         templateFile: '_templates/component/component.index.hbs'
       },
-      {
-        type: 'add',
-        path: 'src/components/{{name}}/_{{dashCase name}}.scss',
-        templateFile: '_templates/component/component.scss.hbs'
-      },
+      // {
+      //   type: 'add',
+      //   path: 'src/components/{{name}}/_{{dashCase name}}.scss',
+      //   templateFile: '_templates/component/component.scss.hbs'
+      // },
       {
         type: 'add',
         path: 'src/components/{{name}}/{{name}}.spec.ts',

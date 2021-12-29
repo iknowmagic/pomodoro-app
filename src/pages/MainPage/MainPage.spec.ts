@@ -2,15 +2,15 @@ import { createPinia, setActivePinia } from 'pinia'
 
 import { mount } from '@cypress/vue'
 
-import HelloWorld from './HelloWorld.vue'
+import Component from './index'
 
 before(() => {
   setActivePinia(createPinia())
 })
 
 it('renders a message', () => {
-  // @ts-expect-error testing
-  mount(HelloWorld, {
+  // @ts-expect-error test
+  mount(Component, {
     propsData: {
       msg: 'Hello Cypress!'
     }

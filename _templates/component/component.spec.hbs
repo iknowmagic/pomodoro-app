@@ -9,7 +9,8 @@ before(() => {
 })
 
 it('renders a message', () => {
-  mount({{name}}, {
+  // @ts-expect-error test component
+  mount(Component, {
     propsData: {
       msg: 'Hello Cypress!'
     }
