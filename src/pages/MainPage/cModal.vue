@@ -5,7 +5,7 @@
     <div class="bg-design-6 w-sm h-full z-10 rounded-lg">
       <div class="flex flex-row justify-between px-8 py-6">
         <div class="h2-sm">Settings</div>
-        <div>X</div>
+        <div class="cursor-pointer" @click="store.modalVisible = false">X</div>
       </div>
       <div class="bg-design-4 h-[1px] w-full"></div>
       <div class="px-8 py-6">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div
-      class="z-12 px-12 py-4 text-center mt-[-1.8rem] rounded-[30px] font-bold bg-design-1"
+      class="z-12 px-12 py-4 text-center mt-[-1.8rem] rounded-[30px] font-bold bg-design-1 text-design-6"
     >
       Apply
     </div>
@@ -27,7 +27,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+import { useModal } from '@/store'
+
 export default defineComponent({
-  name: 'CModal'
+  name: 'CModal',
+  setup() {
+    const store = useModal()
+
+    return { store }
+  }
 })
 </script>

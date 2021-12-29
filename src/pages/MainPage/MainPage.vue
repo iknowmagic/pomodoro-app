@@ -53,15 +53,17 @@
         <div v-if="!isActive" class="h3-sm">resume</div>
       </div>
     </div>
-    <div class="pt-7 cursor-pointer">
+    <div class="pt-7 cursor-pointer" @click="store.modalVisible = true">
       <img src="@/assets/icon-settings.svg" alt="settings" />
     </div>
   </div>
-  <c-modal />
+  <c-modal v-if="store.modalVisible" />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+
+import { useModal } from '@/store'
 
 import cModal from './cModal.vue'
 import useTimer from './useTimer'
@@ -82,6 +84,10 @@ export default defineComponent({
       initTimer,
       percentage
     } = useTimer()
+
+    const store = useModal()
+    console.log(store.modalVisible)
+
     return {
       timerType,
       timerToTime,
@@ -90,7 +96,9 @@ export default defineComponent({
       start,
       isActive,
       initTimer,
-      percentage
+      percentage,
+
+      store
     }
   }
 })
