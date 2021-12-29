@@ -57,23 +57,28 @@
       <img src="@/assets/icon-settings.svg" alt="settings" />
     </div>
   </div>
+  <c-modal />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+import cModal from './cModal.vue'
 import useTimer from './useTimer'
 
 export default defineComponent({
   name: 'MainPage',
+  components: {
+    cModal
+  },
   setup() {
     const {
       timerType,
       timerToTime,
       pause,
       resume,
+      start,
       isActive,
-      timerMap,
       initTimer,
       percentage
     } = useTimer()
@@ -82,8 +87,8 @@ export default defineComponent({
       timerToTime,
       pause,
       resume,
+      start,
       isActive,
-      timerMap,
       initTimer,
       percentage
     }

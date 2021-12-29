@@ -56,6 +56,11 @@ const useTimer = () => {
     resume()
   }
 
+  const start = () => {
+    timer.value = timerMap.value[timerType.value].duration
+    resume()
+  }
+
   watch(timerType, () => {
     timer.value = timerMap.value[timerType.value].duration
   })
@@ -69,6 +74,7 @@ const useTimer = () => {
     timerToTime,
     pause,
     resume,
+    start,
     isActive,
     timerMap,
     initTimer,

@@ -10,20 +10,6 @@ export default defineConfig({
     },
     fontSize: {
       base: '16px',
-
-      h2: [
-        '28px',
-        {
-          lineHeight: '34px'
-        }
-      ],
-      h3: [
-        '16px',
-        {
-          letterSpacing: '15px',
-          lineHeight: '19px'
-        }
-      ],
       h4: [
         '13px',
         {
@@ -62,7 +48,7 @@ export default defineConfig({
     'h2-lg': 'text-[28px] font-bold',
     'h2-sm': 'text-[1.5rem] font-bold',
     'h3-sm': 'text-[0.85rem] tracking-[0.85rem] font-bold uppercase',
-    'h-4': 'text-h4 font-bold uppercase',
+    'h4-sm': 'text-[11px] tracking-[4px] font-bold uppercase',
     'body-1': 'text-[0.75rem] font-bold',
     'body-2': 'text-[12px] font-bold',
     'pill-selected': 'bg-design-1 rounded-[3rem] p-1.2rem text-design-5'
