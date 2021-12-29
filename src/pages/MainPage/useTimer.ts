@@ -5,24 +5,14 @@ import { useIntervalFn, useStorage } from '@vueuse/core'
 const useTimer = () => {
   const timerType = ref('pomodoro')
 
-  let initValue
-  try {
-    // @ts-expect-error localStorage
-    initValue = JSON.parse(localStorage.getItem('timerMap'))
-  } catch {
-    initValue = {
-      pomodoro: { duration: 60 * 25 },
-      shortBreak: { duration: 60 * 5 },
-      longBreak: { duration: 60 * 15 }
-    }
+  const initValue = {
+    pomodoro: { duration: 60 * 25 },
+    shortBreak: { duration: 60 * 5 },
+    longBreak: { duration: 60 * 15 }
   }
 
-  // const pomodoroCount = useStorage(
-  //   'pomodoroCount',
-  //   localStorage.getItem('pomodoroCount') || 0,
-  //   localStorage
-  // )
-
+  const pomodoros = ref(1)
+  const auto = ref(true)
   const timerMap = useStorage('timerMap', initValue, localStorage)
   const timer = ref(timerMap.value[timerType.value].duration)
   const currDuration = timerMap.value[timerType.value].duration
@@ -34,12 +24,26 @@ const useTimer = () => {
     () => {
       if (--timer.value <= 0) {
         timer.value = 0
-        pause()
+        nextTimer()
       }
     },
     1000,
     { immediate: false }
   )
+
+  const nextTimer = () => {
+    if (timerType.value === 'pomodoro') {
+      pomodoros.value++
+      if (pomodoros.value < 4) {
+        initTimer('shortBreak')
+      } else {
+        pomodoros.value = 1
+        initTimer('longBreak')
+      }
+    } else {
+      initTimer('pomodoro')
+    }
+  }
 
   const timerToTime = () => {
     let minutes
@@ -53,7 +57,9 @@ const useTimer = () => {
 
   const initTimer = (type: string) => {
     timerType.value = type
-    resume()
+    if (auto.value) {
+      resume()
+    }
   }
 
   const start = () => {
@@ -78,7 +84,8 @@ const useTimer = () => {
     isActive,
     timerMap,
     initTimer,
-    percentage
+    percentage,
+    pomodoros
   }
 }
 

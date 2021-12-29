@@ -1,10 +1,10 @@
 <template>
   <div
-    class="flex flex-col gap-[3rem] justify-center items-center w-sm h-full px-[30px]"
+    class="flex flex-col gap-3rem justify-center items-center w-sm h-full px-[30px]"
   >
     <div class="text-design-4 h2-sm">pomodoro</div>
     <div
-      class="px-1 text-design-4 body-1 grid grid-cols-3 items-center text-center bg-design-8 h-[4rem] w-full rounded-[5rem] z-1"
+      class="px-1 text-design-4 body-1 grid grid-cols-3 items-center text-center bg-design-8 h-4rem w-full rounded-5rem z-1"
     >
       <div
         :class="[
@@ -35,20 +35,25 @@
       </div>
     </div>
     <div
-      class="cursor-pointer bg-design-8 g-1 rounded-full w-[300px] h-[300px] flex flex-col justify-center items-center"
+      class="cursor-pointer bg-design-8 g-1 rounded-full w-300px h-300px flex flex-col justify-center items-center"
       style="
         background: linear-gradient(315deg, #2e325a 0%, #0e112a 100%);
         box-shadow: -50px -50px 100px #272c5a, 50px 50px 100px #121530;
       "
     >
       <div
-        class="border-[10px] border-design-8 gap-[1rem] w-[265px] h-[265px] flex flex-col justify-center items-center"
+        class="border-10px border-design-8 gap-1rem w-270px h-270px flex flex-col justify-center items-center"
         :style="'--value: ' + percentage"
         role="progressbar"
         @click="isActive ? pause() : resume()"
       >
-        <div class="h1-sm text-center">{{ timerToTime() }}</div>
+        <c-fitty :active="timerToTime().toString().length > 5">
+          {{ timerToTime() }}
+        </c-fitty>
 
+        <div :class="['h4-sm', { 'text-gray-500': timerType !== 'pomodoro' }]">
+          {{ pomodoros }} / 4
+        </div>
         <div v-if="isActive" class="h3-sm">pause</div>
         <div v-if="!isActive" class="h3-sm">resume</div>
       </div>
@@ -65,14 +70,17 @@ import { defineComponent, ref } from 'vue'
 
 import { useModal } from '@/store'
 
+import cFitty from './cFitty.vue'
 import cModal from './cModal.vue'
 import useTimer from './useTimer'
 
 export default defineComponent({
   name: 'MainPage',
   components: {
-    cModal
+    cModal,
+    cFitty
   },
+
   setup() {
     const {
       timerType,
@@ -82,7 +90,8 @@ export default defineComponent({
       start,
       isActive,
       initTimer,
-      percentage
+      percentage,
+      pomodoros
     } = useTimer()
 
     const store = useModal()
@@ -97,6 +106,7 @@ export default defineComponent({
       isActive,
       initTimer,
       percentage,
+      pomodoros,
 
       store
     }
