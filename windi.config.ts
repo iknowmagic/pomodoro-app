@@ -44,7 +44,7 @@ export default defineConfig({
   shortcuts: {
     'h1-lg': 'text-[100px] line-height-[120px] tracking-[-5px] font-bold',
     // 'h1-sm': 'text-[80px] line-height-[80px] tracking-[0px] font-bold',
-    'h1-sm': 'text-5xl text-bold',
+    'h1-sm': 'text-4.5rem font-bold',
     'h2-lg': 'text-[28px] font-bold',
     'h2-sm': 'text-[1.5rem] font-bold',
     'h3-sm': 'text-[0.85rem] tracking-[0.85rem] font-bold uppercase',

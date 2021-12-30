@@ -47,7 +47,15 @@
         role="progressbar"
         @click="isActive ? pause() : resume()"
       >
-        <c-fitty :active="timerToTime().toString().length > 5">
+        <c-fitty
+          :active="timerToTime().toString().length > 5"
+          :class="[
+            'pt-8',
+            'h1-sm',
+            { 'text-6rem': timerToTime().toString().length === 2 },
+            { 'pt-2': timerToTime().toString().length === 2 }
+          ]"
+        >
           {{ timerToTime() }}
         </c-fitty>
 
@@ -58,7 +66,14 @@
         <div v-if="!isActive" class="h3-sm">resume</div>
       </div>
     </div>
-    <div class="pt-7 cursor-pointer" @click="store.modalVisible = true">
+    <div class="grid grid-cols-12 gap-2 justify-center h-2">
+      <div
+        v-for="n in sessions"
+        :key="n"
+        class="bg-design-1 w-2 h-2 rounded"
+      ></div>
+    </div>
+    <div class="cursor-pointer" @click="store.modalVisible = true">
       <img src="@/assets/icon-settings.svg" alt="settings" />
     </div>
   </div>
@@ -66,7 +81,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 
 import { useModal } from '@/store'
 
@@ -91,11 +106,11 @@ export default defineComponent({
       isActive,
       initTimer,
       percentage,
-      pomodoros
+      pomodoros,
+      sessions
     } = useTimer()
 
     const store = useModal()
-    console.log(store.modalVisible)
 
     return {
       timerType,
@@ -107,6 +122,7 @@ export default defineComponent({
       initTimer,
       percentage,
       pomodoros,
+      sessions,
 
       store
     }
