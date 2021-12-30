@@ -66,7 +66,7 @@
         <div v-if="!isActive" class="h3-sm">resume</div>
       </div>
     </div>
-    <div class="grid grid-cols-12 gap-2 justify-center h-2">
+    <div class="grid grid-cols-6 gap-2 justify-center h-2">
       <div
         v-for="n in sessions"
         :key="n"

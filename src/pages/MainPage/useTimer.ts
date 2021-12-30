@@ -10,6 +10,11 @@ const useTimer = () => {
     shortBreak: { duration: 60 * 5 },
     longBreak: { duration: 60 * 15 }
   }
+  // const initValue = {
+  //   pomodoro: { duration: 5 },
+  //   shortBreak: { duration: 5 },
+  //   longBreak: { duration: 5 }
+  // }
 
   const timerType = useStorage('pomodoro', 'pomodoro', localStorage)
   const pomodoros = useStorage('pomodoros', 1, localStorage)
@@ -50,15 +55,19 @@ const useTimer = () => {
 
   const nextTimer = () => {
     if (timerType.value === 'pomodoro') {
-      pomodoros.value++
       sessions.value++
+
       if (pomodoros.value < 4) {
         initTimer('shortBreak')
       } else {
-        pomodoros.value = 1
         initTimer('longBreak')
       }
     } else {
+      if (pomodoros.value === 4) {
+        pomodoros.value = 1
+      } else {
+        pomodoros.value++
+      }
       initTimer('pomodoro')
     }
   }
