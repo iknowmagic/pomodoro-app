@@ -1,6 +1,11 @@
+import { useThemeStore } from '@/store'
+
 function drawCircle(
   percentage = 100,
-  options = { backgroundLine: false, strokeWidth: 6, strokeColor: '#F87070' }
+  options = {
+    backgroundLine: false,
+    strokeWidth: 6
+  }
 ) {
   let val = parseInt(percentage.toString())
   const r = 90
@@ -13,8 +18,10 @@ function drawCircle(
     val = 100
   }
 
+  const themeStore = useThemeStore()
+
   const pct = ((100 - val) / 100) * c
-  const strokeColor = options.strokeColor || '#F87070'
+  const strokeColor = themeStore.colors[themeStore.themeColor]
   const backgroundLineColor = options.backgroundLine
     ? '#D7E0FF'
     : 'transparent'

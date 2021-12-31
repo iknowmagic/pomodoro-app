@@ -2,7 +2,10 @@
   <div
     class="w-full h-full absolute top-0 left-0 flex flex-col justify-center items-center py-16 text-design-8"
   >
-    <div class="w-sm h-full z-10 flex flex-col items-center p-24px">
+    <div
+      ref="modalRef"
+      class="w-sm h-full z-10 flex flex-col items-center p-24px"
+    >
       <div class="bg-design-6 rounded-15px h-575px w-full">
         <div class="flex flex-row justify-between px-8 py-6">
           <div class="h2-sm">Settings</div>
@@ -30,7 +33,7 @@
         </div>
       </div>
       <div
-        class="cursor-pointer w-140px z-12 px-12 py-4 text-center mt-[-30px] rounded-30px font-bold bg-design-1 text-design-6"
+        class="cursor-pointer w-140px z-12 px-12 py-4 text-center mt-[-30px] rounded-30px font-bold bg-design-theme text-design-6"
         @click="applySettings"
       >
         Apply
@@ -40,7 +43,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref } from 'vue'
+import { defineComponent, inject, onMounted, ref } from 'vue'
+
+import { onClickOutside } from '@vueuse/core'
 
 import { useModalStore, useThemeStore, useTimerStore } from '@/store'
 
@@ -77,11 +82,21 @@ export default defineComponent({
       themeStore.themeFont = tempThemeFont.value
       themeStore.themeColor = tempThemeColor.value
 
+      document.documentElement.style.setProperty(
+        '--theme-color',
+        `var(--${themeStore.themeColor})`
+      )
+
       pause()
       reset()
 
       modalStore.modalVisible = false
     }
+
+    const modalRef = ref(null)
+    onClickOutside(modalRef, () => {
+      modalStore.modalVisible = false
+    })
 
     return {
       pomodoroValue,
@@ -92,7 +107,9 @@ export default defineComponent({
       modalStore,
 
       tempThemeFont,
-      tempThemeColor
+      tempThemeColor,
+
+      modalRef
     }
   }
 })

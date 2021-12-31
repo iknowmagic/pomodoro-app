@@ -8,7 +8,7 @@
     >
       <div
         :class="[
-          'cursor-pointer p-1.2rem',
+          'cursor-pointer p-1.1rem tracking-[-1px]',
           { 'pill-selected': timerStore.timerType === 'pomodoro' }
         ]"
         @click="initTimer('pomodoro')"
@@ -17,7 +17,7 @@
       </div>
       <div
         :class="[
-          'cursor-pointer p-1.2rem',
+          'cursor-pointer p-1.1rem tracking-[-1px]',
           { 'pill-selected': timerStore.timerType === 'shortBreak' }
         ]"
         @click="initTimer('shortBreak')"
@@ -26,7 +26,7 @@
       </div>
       <div
         :class="[
-          'cursor-pointer p-1.2rem',
+          'cursor-pointer p-1.1rem tracking-[-1px]',
           { 'pill-selected': timerStore.timerType === 'longBreak' }
         ]"
         @click="initTimer('longBreak')"
@@ -54,8 +54,7 @@
         <c-fitty
           :active="timerToTime.toString().length > 5"
           :class="[
-            'pt-8',
-            'h1-sm',
+            `pt-8 h1-sm ${spFont}`,
             { 'text-6rem': timerToTime.toString().length === 2 },
             { 'pt-2': timerToTime.toString().length === 2 }
           ]"
@@ -79,7 +78,7 @@
       <div
         v-for="n in timerStore.sessions"
         :key="n"
-        class="bg-design-1 w-2 h-2 rounded"
+        class="bg-design-theme w-2 h-2 rounded"
       ></div>
     </div>
     <div class="cursor-pointer" @click="modalStore.modalVisible = true">
@@ -90,9 +89,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, provide } from 'vue'
+import { defineComponent, provide, ref, watch } from 'vue'
 
-import { useModalStore, useTimerStore } from '@/store'
+import { useModalStore, useThemeStore, useTimerStore } from '@/store'
 
 import cFitty from './cFitty.vue'
 import cModal from './cModal.vue'
@@ -112,13 +111,21 @@ export default defineComponent({
 
     const modalStore = useModalStore()
     const timerStore = useTimerStore()
+    const themeStore = useThemeStore()
 
     provide('pause', pause)
     provide('reset', reset)
 
+    const spFont = ref(`h1-${themeStore.themeFont}`)
+
+    watch(themeStore, () => {
+      spFont.value = `h1-${themeStore.themeFont}`
+    })
+
     return {
       timerToTime,
       resume,
+      pause,
       start,
       isActive,
       initTimer,
@@ -126,7 +133,10 @@ export default defineComponent({
       drawCircle,
 
       modalStore,
-      timerStore
+      timerStore,
+      themeStore,
+
+      spFont
     }
   }
 })
