@@ -1,42 +1,20 @@
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import { useIntervalFn, useStorage } from '@vueuse/core'
+
+import { useTimerStore } from '@/store'
 
 import drawCircle from './favicons'
 
 const useTimer = () => {
-  const initValue = {
-    pomodoro: { duration: 60 * 25 },
-    shortBreak: { duration: 60 * 5 },
-    longBreak: { duration: 60 * 15 }
-  }
-  // const initValue = {
-  //   pomodoro: { duration: 5 },
-  //   shortBreak: { duration: 5 },
-  //   longBreak: { duration: 5 }
-  // }
+  const timerStore = useTimerStore()
 
-  const timerType = useStorage('pomodoro', 'pomodoro', localStorage)
-  const pomodoros = useStorage('pomodoros', 1, localStorage)
-  const sessions = useStorage('sessions', 0, localStorage)
-  const timerMap = useStorage('timerMap', initValue, localStorage)
-  const timer = useStorage(
-    'timer',
-    timerMap.value[timerType.value].duration,
-    localStorage
-  )
-
-  const showSeconds = ref(false)
-  const auto = ref(true)
-  const currDuration = timerMap.value[timerType.value].duration
-  const percentage = ref(
-    Math.floor(((timer.value || currDuration) / currDuration) * 100)
-  )
+  const currDuration = timerStore.timerMap[timerStore.timerType].duration
 
   const { pause, resume, isActive } = useIntervalFn(
     () => {
-      if (--timer.value <= 0) {
-        timer.value = 0
+      if (--timerStore.timer <= 0) {
+        timerStore.timer = 0
         nextTimer()
       }
       renderFavicon()
@@ -49,83 +27,84 @@ const useTimer = () => {
     const favicon = document.getElementById('favicon')
 
     if (favicon) {
-      favicon.href = drawCircle(percentage.value)
+      favicon.href = drawCircle(timerStore.percentage, {
+        backgroundLine: true,
+        strokeWidth: 10
+      })
     }
   }
 
   const nextTimer = () => {
-    if (timerType.value === 'pomodoro') {
-      sessions.value++
+    if (timerStore.timerType === 'pomodoro') {
+      timerStore.sessions++
 
-      if (pomodoros.value < 4) {
+      if (timerStore.pomodoros < 4) {
         initTimer('shortBreak')
       } else {
         initTimer('longBreak')
       }
     } else {
-      if (pomodoros.value === 4) {
-        pomodoros.value = 1
+      if (timerStore.pomodoros === 4) {
+        timerStore.pomodoros = 1
       } else {
-        pomodoros.value++
+        timerStore.pomodoros++
       }
       initTimer('pomodoro')
     }
   }
 
-  const timerToTime = () => {
+  const timerToTime = computed(() => {
     let minutes
     let seconds
-    minutes = parseInt((timer.value / 60).toString(), 10)
-    seconds = parseInt((timer.value % 60).toString(), 10)
+    minutes = parseInt((timerStore.timer / 60).toString(), 10)
+    seconds = parseInt((timerStore.timer % 60).toString(), 10)
     minutes = minutes < 10 ? '0' + minutes : minutes
     seconds = seconds < 10 ? '0' + seconds : seconds
 
-    if (showSeconds.value) return minutes + ':' + seconds
+    if (timerStore.showSeconds) return minutes + ':' + seconds
 
     // if minutes = 0 but seconds > 0, display minutes = 1
     return parseInt(seconds.toString()) !== 0 &&
       parseInt(minutes.toString()) === 0
       ? '01'
       : minutes
-  }
+  })
 
   const initTimer = (type: string) => {
-    timerType.value = type
-    if (auto.value) {
+    timerStore.timerType = type
+    if (timerStore.auto) {
       resume()
     }
   }
 
   const start = () => {
-    timer.value = timerMap.value[timerType.value].duration
+    timerStore.timer = timerStore.timerMap[timerStore.timerType].duration
     resume()
   }
 
   const reset = () => {
-    pomodoros.value = 1
-    sessions.value = 0
+    timerStore.pomodoros = 1
+    timerStore.sessions = 0
+    timerStore.timerType = 'pomodoro'
+    timerStore.timer = timerStore.timerMap[timerStore.timerType].duration
   }
 
-  watch(timerType, () => {
-    timer.value = timerMap.value[timerType.value].duration
-  })
-  watch(timer, () => {
-    const duration = timerMap.value[timerType.value].duration
-    percentage.value = Math.floor(((timer.value || duration) / duration) * 100)
+  watch(timerStore, () => {
+    timerStore.timer = timerStore.timerMap[timerStore.timerType].duration
+    const duration = timerStore.timerMap[timerStore.timerType].duration
+    timerStore.percentage = Math.floor(
+      ((timerStore.timer || duration) / duration) * 100
+    )
   })
 
   return {
-    timerType,
     timerToTime,
     pause,
     resume,
     start,
+    reset,
     isActive,
-    timerMap,
-    initTimer,
-    percentage,
-    pomodoros,
-    sessions
+    initTimer
   }
 }
 

@@ -1,92 +1,102 @@
 <template>
   <div
-    class="flex flex-col gap-3rem justify-center items-center w-sm h-full px-[30px]"
+    class="flex flex-col gap-3rem justify-center items-center w-sm h-full px-24px"
   >
     <div class="text-design-4 h2-sm">pomodoro</div>
     <div
-      class="px-1 text-design-4 body-1 grid grid-cols-3 items-center text-center bg-design-8 h-4rem w-full rounded-5rem z-1"
+      class="px-1 text-design-4 body-2 grid grid-cols-3 items-center text-center bg-design-8 h-4rem w-full rounded-5rem z-1"
     >
       <div
         :class="[
           'cursor-pointer p-1.2rem',
-          { 'pill-selected': timerType === 'pomodoro' }
+          { 'pill-selected': timerStore.timerType === 'pomodoro' }
         ]"
         @click="initTimer('pomodoro')"
       >
-        pomodoro
+        <span class="opacity-40">pomodoro</span>
       </div>
       <div
         :class="[
           'cursor-pointer p-1.2rem',
-          { 'pill-selected': timerType === 'shortBreak' }
+          { 'pill-selected': timerStore.timerType === 'shortBreak' }
         ]"
         @click="initTimer('shortBreak')"
       >
-        short break
+        <span class="opacity-40">short break</span>
       </div>
       <div
         :class="[
           'cursor-pointer p-1.2rem',
-          { 'pill-selected': timerType === 'longBreak' }
+          { 'pill-selected': timerStore.timerType === 'longBreak' }
         ]"
         @click="initTimer('longBreak')"
       >
-        long break
+        <span class="opacity-40">long break</span>
       </div>
     </div>
     <div
-      class="cursor-pointer bg-design-8 g-1 rounded-full w-300px h-300px flex flex-col justify-center items-center"
+      class="cursor-pointer bg-design-8 g-1 rounded-full w-312px h-312px flex flex-col justify-center items-center ml-[-5px]"
       style="
         background: linear-gradient(315deg, #2e325a 0%, #0e112a 100%);
         box-shadow: -50px -50px 100px #272c5a, 50px 50px 100px #121530;
       "
     >
       <div
-        class="border-10px border-design-8 gap-1rem w-270px h-270px flex flex-col justify-center items-center"
-        :style="'--value: ' + percentage"
+        class="bg-design-8 rounded-full gap-1rem w-280px h-280px flex flex-col justify-center items-center"
+        :style="`background-image: url('${drawCircle(timerStore.percentage)}');
+          background-repeat: no-repeat;
+          background-size: 275px 275px;
+          background-position: center center;
+          `"
         role="progressbar"
         @click="isActive ? pause() : resume()"
       >
         <c-fitty
-          :active="timerToTime().toString().length > 5"
+          :active="timerToTime.toString().length > 5"
           :class="[
             'pt-8',
             'h1-sm',
-            { 'text-6rem': timerToTime().toString().length === 2 },
-            { 'pt-2': timerToTime().toString().length === 2 }
+            { 'text-6rem': timerToTime.toString().length === 2 },
+            { 'pt-2': timerToTime.toString().length === 2 }
           ]"
         >
-          {{ timerToTime() }}
+          {{ timerToTime }}
         </c-fitty>
 
-        <div :class="['h4-sm', { 'text-gray-500': timerType !== 'pomodoro' }]">
-          {{ pomodoros }} / 4
+        <div
+          :class="[
+            'h4-sm ml-10px',
+            { 'text-gray-500': timerStore.timerType !== 'pomodoro' }
+          ]"
+        >
+          {{ timerStore.pomodoros }} / 4
         </div>
-        <div v-if="isActive" class="h3-sm">pause</div>
-        <div v-if="!isActive" class="h3-sm">resume</div>
+        <div v-if="isActive" class="h3-sm ml-15px">pause</div>
+        <div v-if="!isActive" class="h3-sm ml-15px">resume</div>
       </div>
     </div>
     <div class="grid grid-cols-6 gap-2 justify-center h-2">
       <div
-        v-for="n in sessions"
+        v-for="n in timerStore.sessions"
         :key="n"
         class="bg-design-1 w-2 h-2 rounded"
       ></div>
     </div>
-    <div class="cursor-pointer" @click="store.modalVisible = true">
+    <div class="cursor-pointer" @click="modalStore.modalVisible = true">
       <img src="@/assets/icon-settings.svg" alt="settings" />
     </div>
   </div>
-  <c-modal v-if="store.modalVisible" />
+  <c-modal v-if="modalStore.modalVisible" />
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 
-import { useModal } from '@/store'
+import { useModalStore, useTimerStore } from '@/store'
 
 import cFitty from './cFitty.vue'
 import cModal from './cModal.vue'
+import drawCircle from './favicons'
 import useTimer from './useTimer'
 
 export default defineComponent({
@@ -97,56 +107,31 @@ export default defineComponent({
   },
 
   setup() {
-    const {
-      timerType,
-      timerToTime,
-      pause,
-      resume,
-      start,
-      isActive,
-      initTimer,
-      percentage,
-      pomodoros,
-      sessions
-    } = useTimer()
+    const { timerToTime, pause, resume, start, isActive, initTimer } =
+      useTimer()
 
-    const store = useModal()
+    const modalStore = useModalStore()
+    const timerStore = useTimerStore()
 
     return {
-      timerType,
       timerToTime,
       pause,
       resume,
       start,
       isActive,
       initTimer,
-      percentage,
-      pomodoros,
-      sessions,
 
-      store
+      drawCircle,
+
+      modalStore,
+      timerStore
     }
   }
 })
 </script>
 
-<style>
-@property --pgPercentage {
-  syntax: '<number>';
-  inherits: false;
-  initial-value: 0;
-}
-div[role='progressbar'] {
-  --fg: #f87070;
-  --bg: #161932;
-  border-radius: 50%;
-  --pgPercentage: var(--value);
-  background: radial-gradient(
-      closest-side,
-      #161932 94%,
-      transparent 0 99.9%,
-      #161932 0
-    ),
-    conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+<style scoped>
+.pill-selected > span {
+  opacity: 1;
 }
 </style>

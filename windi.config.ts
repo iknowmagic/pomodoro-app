@@ -42,15 +42,16 @@ export default defineConfig({
     }
   },
   shortcuts: {
-    'h1-lg': 'text-[100px] line-height-[120px] tracking-[-5px] font-bold',
-    // 'h1-sm': 'text-[80px] line-height-[80px] tracking-[0px] font-bold',
-    'h1-sm': 'text-4.5rem font-bold',
-    'h2-lg': 'text-[28px] font-bold',
-    'h2-sm': 'text-[1.5rem] font-bold',
-    'h3-sm': 'text-[0.85rem] tracking-[0.85rem] font-bold uppercase',
-    'h4-sm': 'text-[11px] tracking-[4px] font-bold uppercase',
-    'body-1': 'text-[0.75rem] font-bold',
-    'body-2': 'text-[12px] font-bold',
-    'pill-selected': 'bg-design-1 rounded-[3rem] p-1.2rem text-design-5'
+    'h1-lg': 'text-100px leading-120px tracking-[-5px] font-bold',
+    'h1-sm': 'text-100px leading-120px tracking-[-5px] font-bold',
+    'h2-lg': 'text-28px leading-28px font-bold',
+    'h2-sm': 'text-20px leading-20px font-bold',
+    'h3-lg': 'text-16px leading-19px tracking-15px uppercase font-bold',
+    'h3-sm': 'text-14px leading-14px tracking-13px uppercase font-bold',
+    'h4-lg': 'text-13px leading-16px tracking-5px uppercase font-bold',
+    'h4-sm': 'text-11px leading-11px tracking-4px uppercase font-bold',
+    'body-1': 'text-14px leading-18px font-bold',
+    'body-2': 'text-12px leading-14px font-bold',
+    'pill-selected': 'bg-design-1 rounded-26px p-1.2rem text-design-5 '
   }
 })
