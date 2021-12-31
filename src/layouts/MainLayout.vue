@@ -13,3 +13,13 @@ export default defineComponent({
   name: 'MainLayout'
 })
 </script>
+
+<style>
+:root {
+  --design-1: #f87070;
+  --design-2: #70f3f8;
+  --design-3: #d881f8;
+
+  --design-theme: var(--design-1);
+}
+</style>

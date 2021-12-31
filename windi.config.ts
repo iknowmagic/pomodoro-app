@@ -9,16 +9,7 @@ export default defineConfig({
       lg: '1440px'
     },
     fontSize: {
-      base: '16px',
-      h4: [
-        '13px',
-        {
-          letterSpacing: '5px',
-          lineHeight: '16px'
-        }
-      ],
-      'body-1': ['14px', '18px'],
-      'body-2': ['12px', '14px']
+      base: '16px'
     },
     fontFamily: {
       sans: ['Kumbh Sans', 'sans-serif'],
@@ -30,6 +21,7 @@ export default defineConfig({
       gray: colors.gray,
       dark: colors.dark,
       design: {
+        theme: 'var(--theme-color)',
         '1': '#F87070',
         '2': '#70F3F8',
         '3': '#D881F8',
@@ -52,6 +44,10 @@ export default defineConfig({
     'h4-sm': 'text-11px leading-11px tracking-4px uppercase font-bold',
     'body-1': 'text-14px leading-18px font-bold',
     'body-2': 'text-12px leading-14px font-bold',
-    'pill-selected': 'bg-design-1 rounded-26px p-1.2rem text-design-5 '
+    'pill-selected': 'bg-design-1 rounded-26px p-1.2rem text-design-5',
+    'circle-font':
+      'cursor-pointer rounded-full w-40px h-40px flex justify-center items-center font-bold',
+    'circle-color':
+      'cursor-pointer rounded-full w-40px h-40px flex justify-center items-center font-bold'
   }
 })
