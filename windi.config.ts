@@ -43,7 +43,7 @@ export default defineConfig({
   },
   shortcuts: {
     'h1-lg': 'text-100px leading-120px tracking-[-5px] font-bold',
-    'h1-sm': 'text-100px leading-120px tracking-[-5px] font-bold',
+    'h1-sm': 'text-80px leading-80px tracking-[-3px] font-bold',
     'h2-lg': 'text-28px leading-28px font-bold',
     'h2-sm': 'text-20px leading-20px font-bold',
     'h3-lg': 'text-16px leading-19px tracking-15px uppercase font-bold',

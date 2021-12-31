@@ -1,6 +1,6 @@
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
 
-import { useIntervalFn, useStorage } from '@vueuse/core'
+import { useIntervalFn } from '@vueuse/core'
 
 import { useTimerStore } from '@/store'
 
@@ -8,25 +8,40 @@ import drawCircle from './favicons'
 
 const useTimer = () => {
   const timerStore = useTimerStore()
+  timerStore.showSeconds = true
 
-  const currDuration = timerStore.timerMap[timerStore.timerType].duration
+  const updatePercentage = () => {
+    const duration = timerStore.timerMap[timerStore.timerType].duration
+    timerStore.percentage = Math.floor(
+      ((timerStore.timer || duration) / duration) * 100
+    )
+  }
+
+  updatePercentage()
 
   const { pause, resume, isActive } = useIntervalFn(
     () => {
-      if (--timerStore.timer <= 0) {
+      timerStore.timer--
+      if (timerStore.timer <= 0) {
         timerStore.timer = 0
         nextTimer()
       }
+      updatePercentage()
       renderFavicon()
     },
     1000,
     { immediate: false }
   )
 
+  watch(isActive, () => {
+    console.log(isActive.value)
+  })
+
   const renderFavicon = () => {
     const favicon = document.getElementById('favicon')
 
     if (favicon) {
+      // @ts-expect-error favicon
       favicon.href = drawCircle(timerStore.percentage, {
         backgroundLine: true,
         strokeWidth: 10
@@ -87,15 +102,8 @@ const useTimer = () => {
     timerStore.sessions = 0
     timerStore.timerType = 'pomodoro'
     timerStore.timer = timerStore.timerMap[timerStore.timerType].duration
+    updatePercentage()
   }
-
-  watch(timerStore, () => {
-    timerStore.timer = timerStore.timerMap[timerStore.timerType].duration
-    const duration = timerStore.timerMap[timerStore.timerType].duration
-    timerStore.percentage = Math.floor(
-      ((timerStore.timer || duration) / duration) * 100
-    )
-  })
 
   return {
     timerToTime,

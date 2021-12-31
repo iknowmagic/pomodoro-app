@@ -90,7 +90,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, provide } from 'vue'
 
 import { useModalStore, useTimerStore } from '@/store'
 
@@ -107,15 +107,17 @@ export default defineComponent({
   },
 
   setup() {
-    const { timerToTime, pause, resume, start, isActive, initTimer } =
+    const { timerToTime, pause, resume, reset, start, isActive, initTimer } =
       useTimer()
 
     const modalStore = useModalStore()
     const timerStore = useTimerStore()
 
+    provide('pause', pause)
+    provide('reset', reset)
+
     return {
       timerToTime,
-      pause,
       resume,
       start,
       isActive,

@@ -38,19 +38,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent, inject, ref } from 'vue'
 
 import { useModalStore, useTimerStore } from '@/store'
 
 import InputNumber from '@/components/InputNumber'
 
-import useTimer from './useTimer'
-
 export default defineComponent({
   name: 'CModal',
   components: { InputNumber },
   setup() {
-    const { pause, reset } = useTimer()
+    const pause = inject('pause') as () => null
+    const reset = inject('reset') as () => null
+
     const modalStore = useModalStore()
     const timerStore = useTimerStore()
 
@@ -64,6 +64,7 @@ export default defineComponent({
         shortBreak: { duration: shortBreakValue.value * 60 },
         longBreak: { duration: longBreakValue.value * 60 }
       }
+
       pause()
       reset()
 
