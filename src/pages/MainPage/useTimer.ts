@@ -33,10 +33,6 @@ const useTimer = () => {
     { immediate: false }
   )
 
-  watch(isActive, () => {
-    console.log(isActive.value)
-  })
-
   const renderFavicon = () => {
     const favicon = document.getElementById('favicon')
 
@@ -87,13 +83,19 @@ const useTimer = () => {
 
   const initTimer = (type: string) => {
     timerStore.timerType = type
+    updateTimer()
+    updatePercentage()
     if (timerStore.auto) {
       resume()
     }
   }
 
-  const start = () => {
+  const updateTimer = () => {
     timerStore.timer = timerStore.timerMap[timerStore.timerType].duration
+  }
+
+  const start = () => {
+    updateTimer()
     resume()
   }
 
@@ -101,7 +103,7 @@ const useTimer = () => {
     timerStore.pomodoros = 1
     timerStore.sessions = 0
     timerStore.timerType = 'pomodoro'
-    timerStore.timer = timerStore.timerMap[timerStore.timerType].duration
+    updateTimer()
     updatePercentage()
   }
 

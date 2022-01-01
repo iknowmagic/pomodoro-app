@@ -1,17 +1,19 @@
 <template>
-  <div class="flex flex-row justify-center gap-16px">
+  <div class="flex flex-row justify-center gap-12px">
     <div
       v-for="(bgcolor, key) in colors"
       :key="key"
-      :class="`circle-color ${bgcolor}`"
+      class="group hover:border-1 hover:border-design-7 rounded-full"
       @click="changeColor(key)"
     >
-      <img
-        v-if="key === themeColor"
-        src="@/assets/check-mark.svg"
-        alt="selected"
-        class="w-18px"
-      />
+      <div :class="`circle-color ${bgcolor} m-5px group-hover:m-4px`">
+        <img
+          v-if="key === themeColor"
+          src="@/assets/check-mark.svg"
+          alt="selected"
+          class="w-18px"
+        />
+      </div>
     </div>
   </div>
 </template>

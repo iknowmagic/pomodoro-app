@@ -3,14 +3,18 @@
     <div
       v-for="(font, key) in fonts"
       :key="key"
-      :class="[
-        `circle-font  ${font}`,
-        { 'bg-design-8 text-design-6': key === themeFont },
-        { 'bg-design-7 text-design-5': key !== themeFont }
-      ]"
+      class="group hover:border-1 hover:border-design-7 rounded-full"
       @click="changeFont(key)"
     >
-      Aa
+      <div
+        :class="[
+          `circle-font  ${font} m-5px group-hover:m-4px`,
+          { 'bg-design-8 text-design-6': key === themeFont },
+          { 'bg-design-7 text-design-5': key !== themeFont }
+        ]"
+      >
+        Aa
+      </div>
     </div>
   </div>
 </template>

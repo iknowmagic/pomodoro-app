@@ -88,7 +88,7 @@ export default defineComponent({
       )
 
       pause()
-      reset()
+      // reset() // TODO: reset as a flag
 
       modalStore.modalVisible = false
     }

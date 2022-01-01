@@ -46,11 +46,26 @@ export default defineConfig({
     'h4-sm': 'text-11px leading-11px tracking-4px uppercase font-bold',
     'body-1': 'text-14px leading-18px font-bold',
     'body-2': 'text-12px leading-14px font-bold',
-    'pill-selected':
-      'bg-design-theme rounded-26px text-design-5 ',
-    'circle-font':
-      'cursor-pointer rounded-full w-40px h-40px flex justify-center items-center font-bold',
-    'circle-color':
-      'cursor-pointer rounded-full w-40px h-40px flex justify-center items-center font-bold'
+    'pill-selected': 'bg-design-theme rounded-26px text-design-5',
+    'circle-font': `
+      cursor-pointer
+      rounded-full
+      w-40px
+      h-40px
+      flex
+      justify-center
+      items-center
+      font-bold
+      `,
+    'circle-color': `
+      cursor-pointer
+      rounded-full
+      w-40px
+      h-40px
+      flex
+      justify-center
+      items-center
+      font-bold
+      `
   }
 })
