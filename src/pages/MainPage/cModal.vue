@@ -33,17 +33,21 @@
         </div>
       </div>
       <div
-        class="cursor-pointer w-140px z-12 px-12 py-4 text-center mt-[-30px] rounded-30px font-bold bg-design-theme text-design-6 hover:bg-[#ec8883]"
-        @click="applySettings"
+        class="cursor-pointer w-140px z-12 mt-[-30px] rounded-30px bg-design-theme group"
       >
-        Apply
+        <div
+          class="cursor-pointer w-140px px-12 py-4 text-center rounded-30px font-bold group-hover:bg-design-7 text-design-6 group-hover:bg-opacity-20"
+          @click="applySettings"
+        >
+          Apply
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, ref } from 'vue'
+import { defineComponent, inject, ref, watch } from 'vue'
 
 import { onClickOutside } from '@vueuse/core'
 
@@ -61,6 +65,8 @@ export default defineComponent({
     const pause = inject('pause') as () => null
     const reset = inject('reset') as () => null
 
+    const needsReset = ref(false)
+
     const modalStore = useModalStore()
     const timerStore = useTimerStore()
     const themeStore = useThemeStore()
@@ -71,6 +77,10 @@ export default defineComponent({
     const pomodoroValue = ref(timerStore.timerMap.pomodoro.duration / 60)
     const shortBreakValue = ref(timerStore.timerMap.shortBreak.duration / 60)
     const longBreakValue = ref(timerStore.timerMap.longBreak.duration / 60)
+
+    watch(pomodoroValue, () => {
+      needsReset.value = true
+    })
 
     const applySettings = () => {
       timerStore.timerMap = {
@@ -88,7 +98,9 @@ export default defineComponent({
       )
 
       pause()
-      // reset() // TODO: reset as a flag
+      if (needsReset.value) {
+        reset()
+      }
 
       modalStore.modalVisible = false
     }
