@@ -12,14 +12,14 @@
       <div class="grid grid-rows-2">
         <button
           data-action="increment"
-          class="bg-transparent"
+          class="bg-transparent opacity-20 hover:opacity-100"
           @click="increment"
         >
           <img src="@/assets/icon-arrow-up.svg" alt="less" />
         </button>
         <button
           data-action="decrement"
-          class="bg-transparent"
+          class="bg-transparent opacity-20 hover:opacity-100"
           @click="decrement"
         >
           <img src="@/assets/icon-arrow-down.svg" alt="more" />

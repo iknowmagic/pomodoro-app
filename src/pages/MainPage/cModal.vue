@@ -33,7 +33,7 @@
         </div>
       </div>
       <div
-        class="cursor-pointer w-140px z-12 px-12 py-4 text-center mt-[-30px] rounded-30px font-bold bg-design-theme text-design-6"
+        class="cursor-pointer w-140px z-12 px-12 py-4 text-center mt-[-30px] rounded-30px font-bold bg-design-theme text-design-6 hover:bg-[#ec8883]"
         @click="applySettings"
       >
         Apply

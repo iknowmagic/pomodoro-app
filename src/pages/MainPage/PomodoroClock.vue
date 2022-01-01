@@ -46,10 +46,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+import cFitty from './cFitty.vue'
 import drawCircle from './favicons'
 
 export default defineComponent({
   name: 'PomodoroClock',
+  components: {
+    cFitty
+  },
   props: {
     isActive: {
       type: Boolean,
