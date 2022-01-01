@@ -35,7 +35,9 @@
       >
         {{ pomodoros }} / 4
       </div>
-      <div v-if="isActive" class="h3-sm ml-15px">pause</div>
+      <div v-if="isActive" class="h3-sm ml-15px group-hover:text-design-1">
+        pause
+      </div>
       <div v-if="!isActive" class="h3-sm ml-15px group-hover:text-design-1">
         resume
       </div>
