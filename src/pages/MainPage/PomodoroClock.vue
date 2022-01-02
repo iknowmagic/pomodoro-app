@@ -18,7 +18,7 @@
         :class="[
           `pt-8 h1-sm h1-sm md:h1-lg`,
           { 'leading-106px tracking-[0px]': spFont === 'h1-serif' },
-          { 'font-normal tracking-[-8px]': spFont === 'h1-mono' },
+          { 'font-normal tracking-[-6px]': spFont === 'h1-mono' },
           { 'text-6rem': timerToTime.toString().length === 2 },
           { 'pt-2': timerToTime.toString().length === 2 }
         ]"
