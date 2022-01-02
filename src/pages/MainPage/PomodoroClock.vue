@@ -1,13 +1,13 @@
 <template>
   <div
-    class="group cursor-pointer bg-design-8 g-1 rounded-full w-312px h-312px md:w-410px md:h-410px min-h-312px min-w-312px flex flex-col justify-center items-center ml-[-5px]"
+    class="group cursor-pointer g-1 rounded-full w-312px h-312px md:w-410px md:h-410px min-h-312px min-w-312px flex flex-col justify-center items-center ml-[-5px]"
     style="
       background: linear-gradient(315deg, #2e325a 0%, #0e112a 100%);
       box-shadow: -50px -50px 100px #272c5a, 50px 50px 100px #121530;
     "
   >
     <div
-      class="bg-design-8 rounded-full gap-1rem h-full w-full flex flex-col justify-center items-center"
+      class="bg-design-8 rounded-full gap-1rem h-[90%] w-[90%] flex flex-col justify-center items-center"
       :style="progressBarStyle"
       role="progressbar"
       aria-label="progress bar"
