@@ -7,14 +7,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent, onMounted, provide } from 'vue'
+
+import { useBreakpoints } from '@vueuse/core'
 
 import { useThemeStore } from '@/store'
+
+// @ts-expect-error
+import bkpoints from '../../windi.breakpoints'
 
 export default defineComponent({
   name: 'MainLayout',
   setup() {
     const themeStore = useThemeStore()
+
+    const breakpoints = useBreakpoints(bkpoints)
+    const sm = breakpoints.smaller('md')
+    const md = breakpoints.between('md', 'lg')
+    const lg = breakpoints.greater('lg')
+    const mq = { sm, md, lg }
+    provide('mq', mq)
 
     onMounted(() => {
       document.documentElement.style.setProperty(

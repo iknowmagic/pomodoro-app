@@ -1,13 +1,11 @@
 import colors from 'windicss/colors'
 import { defineConfig } from 'windicss/helpers'
 
+import breakpoints from './windi.breakpoints'
+
 export default defineConfig({
   theme: {
-    screens: {
-      sm: '375px',
-      md: '768px',
-      lg: '1440px'
-    },
+    screens: breakpoints,
     fontSize: {
       base: '16px'
     },
@@ -41,7 +39,7 @@ export default defineConfig({
     'h1-sm': 'text-80px leading-80px tracking-[-4px] font-bold',
     'h1-serif': 'leading-106px tracking-[0px]',
     'h1-mono': 'font-normal tracking-[-8px]',
-    'h2-lg': 'text-28px leading-28px font-bold',
+    'h2-lg': 'text-32px leading-32px font-bold',
     'h2-sm': 'text-20px leading-20px font-bold',
     'h3-lg': 'text-16px leading-19px tracking-15px uppercase font-bold',
     'h3-sm': 'text-14px leading-14px tracking-13px uppercase font-bold',
