@@ -1,5 +1,5 @@
 <template>
-  <div class="w-200px md:w-300px text-center">
+  <div class="w-200px md:w-275px text-center">
     <div :id="id">
       <slot />
     </div>
