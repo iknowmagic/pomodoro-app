@@ -1,5 +1,6 @@
 <template>
   <div
+    role="navigation"
     class="px-1 text-design-4 body-2 body-2 md:body-1 grid grid-cols-3 items-center text-center bg-design-8 h-4rem w-full rounded-5rem z-1"
   >
     <div

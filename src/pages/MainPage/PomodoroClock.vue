@@ -10,6 +10,7 @@
       class="bg-design-8 rounded-full gap-1rem h-full w-full flex flex-col justify-center items-center"
       :style="progressBarStyle"
       role="progressbar"
+      aria-label="progress bar"
       @click="isActive ? pause() : resume()"
     >
       <c-fitty

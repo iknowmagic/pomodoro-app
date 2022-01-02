@@ -1,8 +1,8 @@
 <template>
-  <div
+  <main
     class="flex flex-col gap-3rem justify-center items-center w-sm md:w-md h-full px-24px"
   >
-    <div class="text-design-4 h2-sm md:h2-lg">pomodoro</div>
+    <h1 class="text-design-4 h2-sm md:h2-lg">pomodoro</h1>
     <pomodoro-pills
       :timer-type="timerStore.timerType"
       @initTimer="initTimer"
@@ -35,7 +35,7 @@
     >
       <img src="@/assets/icon-settings.svg" alt="settings" />
     </div>
-  </div>
+  </main>
   <c-modal v-if="modalStore.modalVisible" />
 </template>
 
