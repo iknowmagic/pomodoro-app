@@ -1,12 +1,12 @@
 <template>
   <div
-    class="px-1 text-design-4 sm:body-2 md:body-1 grid grid-cols-3 items-center text-center bg-design-8 h-4rem w-full rounded-5rem z-1"
+    class="px-1 text-design-4 body-2 body-2 md:body-1 grid grid-cols-3 items-center text-center bg-design-8 h-4rem w-full rounded-5rem z-1"
   >
     <div
       v-for="pomodoro in pomodoros"
       :key="pomodoro.timerType"
       :class="[
-        'cursor-pointer p-1.1rem sm:tracking-[-1px] md:tracking-normal',
+        'cursor-pointer p-1.1rem tracking-[-1px] md:tracking-normal',
         { 'pill-selected': timerType === pomodoro.timerType }
       ]"
       @click="initTimer(pomodoro.timerType)"

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row sm:justify-center md:justify-end gap-12px">
+  <div class="flex flex-row justify-center md:justify-end gap-12px">
     <div
       v-for="(bgcolor, key) in colors"
       :key="key"

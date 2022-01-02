@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`bg-design-5 text-design-7 flex flex-col justify-center items-center w-full h-full font-${themeStore.themeFont}`"
+    :class="`min-w-398px bg-design-5 text-design-7 flex flex-col justify-center items-center w-full h-full w-min-sm font-${themeStore.themeFont}`"
   >
     <router-view></router-view>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row sm:justify-center md:justify-end gap-16px">
+  <div class="flex flex-row justify-center md:justify-end gap-16px">
     <div
       v-for="(font, key) in fonts"
       :key="key"

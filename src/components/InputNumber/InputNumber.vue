@@ -1,7 +1,7 @@
 <template>
-  <div class="grid sm:grid-cols-2 md:grid-cols-1 md:grid-rows-2 items-center">
+  <div class="grid grid-cols-2 md:grid-cols-1 md:gap-2 items-center">
     <label :for="id" class="body-2 opacity-40">{{ label }}</label>
-    <div class="input-box rounded-10px bg-design-7 sm:h-40px md:h-48px w-full">
+    <div class="input-box rounded-10px bg-design-7 h-40px md:h-48px w-full">
       <input
         :id="id"
         v-model="currentValue"

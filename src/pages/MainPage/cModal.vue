@@ -4,14 +4,12 @@
   >
     <div
       ref="modalRef"
-      class="sm:w-sm md:w-540px h-full z-10 flex flex-col items-center sm:p-24px md:p-0"
+      class="w-sm md:w-540px z-10 flex flex-col items-center p-24px md:p-0"
     >
-      <div
-        class="bg-design-6 relative rounded-15px h-full w-full sm:min-h-sm md:min-h-md"
-      >
+      <div class="bg-design-6 relative rounded-15px h-full w-full min-h-full">
         <div class="absolute w-full">
           <div class="flex flex-row justify-between items-center px-8 py-6">
-            <div class="sm:h2-sm md:h2-lg">Settings</div>
+            <div class="h2-sm md:h2-lg">Settings</div>
             <div
               class="cursor-pointer"
               @click="modalStore.modalVisible = false"
@@ -26,11 +24,11 @@
           class="px-8 py-6 gap-18px grid mt-[80px] overflow-y-auto"
           style="height: calc(100% - 100px)"
         >
-          <div class="sm:h4-sm md:h4-lg sm:text-center md:text-left">
+          <div class="h4-sm md:h4-lg text-center md:text-left">
             Time (minutes)
           </div>
           <div
-            class="grid md:grid-cols-3 sm:gap-2 md:gap-6 items-center justify-center"
+            class="grid md:grid-cols-3 gap-2 md:gap-6 items-center justify-center"
           >
             <input-number v-model:value="pomodoroValue" label="pomodoro" />
             <input-number
@@ -39,26 +37,21 @@
             />
             <input-number v-model:value="longBreakValue" label="long break" />
           </div>
+
           <div class="bg-design-4 h-[1px] w-full"></div>
-          <div class="grid md:grid-cols-2 items-center sm:gap-4">
-            <div class="sm:h4-sm md:h4-lg sm:text-center md:text-left">
-              Font
-            </div>
+          <div class="grid md:grid-cols-2 items-center gap-4">
+            <div class="h4-sm md:h4-lg text-center md:text-left">Font</div>
             <font-selector v-model:theme-font="tempThemeFont" />
           </div>
           <div class="bg-design-4 h-[1px] w-full"></div>
-          <div class="grid md:grid-cols-2 items-center sm:gap-4">
-            <div class="sm:h4-sm md:h4-lg sm:text-center md:text-left">
-              Color
-            </div>
+          <div class="grid md:grid-cols-2 items-center gap-4">
+            <div class="h4-sm md:h4-lg text-center md:text-left">Color</div>
             <color-selector v-model:theme-color="tempThemeColor" />
           </div>
           <div class="bg-design-4 h-[1px] w-full"></div>
-          <div class="grid md:grid-cols-2 sm:items-center sm:gap-4">
-            <div class="sm:h4-sm md:h4-lg sm:text-center md:text-left">
-              Advanced
-            </div>
-            <div class="grid sm:grid-rows-2 gap-2">
+          <div class="grid md:grid-cols-2 items-center gap-4">
+            <div class="h4-sm md:h4-lg text-center md:text-left">Advanced</div>
+            <div class="grid grid-rows-2 gap-2">
               <toggle-switch
                 v-model:active="tempShowSeconds"
                 label="show seconds"

@@ -1,13 +1,13 @@
 <template>
   <div
-    class="group cursor-pointer bg-design-8 g-1 rounded-full sm:w-312px sm:h-312px md:w-410px md:h-410px min-h-312px min-w-312px flex flex-col justify-center items-center ml-[-5px]"
+    class="group cursor-pointer bg-design-8 g-1 rounded-full w-312px h-312px md:w-410px md:h-410px min-h-312px min-w-312px flex flex-col justify-center items-center ml-[-5px]"
     style="
       background: linear-gradient(315deg, #2e325a 0%, #0e112a 100%);
       box-shadow: -50px -50px 100px #272c5a, 50px 50px 100px #121530;
     "
   >
     <div
-      class="bg-design-8 rounded-full gap-1rem sm:w-280px md:w-366px sm:h-280px md:h-366px flex flex-col justify-center items-center"
+      class="bg-design-8 rounded-full gap-1rem h-full w-full flex flex-col justify-center items-center"
       :style="progressBarStyle"
       role="progressbar"
       @click="isActive ? pause() : resume()"
@@ -15,7 +15,7 @@
       <c-fitty
         :active="timerToTime.toString().length > 5 || spFont === 'h1-mono'"
         :class="[
-          `pt-8 sm:h1-sm md:h1-lg`,
+          `pt-8 h1-sm h1-sm md:h1-lg`,
           { 'leading-106px tracking-[0px]': spFont === 'h1-serif' },
           { 'font-normal tracking-[-8px]': spFont === 'h1-mono' },
           { 'text-6rem': timerToTime.toString().length === 2 },
@@ -36,13 +36,13 @@
       </div>
       <div
         v-if="isActive"
-        class="sm:h3-sm md:h3-lg ml-15px group-hover:text-design-1"
+        class="h3-sm h3-sm md:h3-lg ml-15px group-hover:text-design-1"
       >
         pause
       </div>
       <div
         v-if="!isActive"
-        class="sm:h3-sm md:h3-lg ml-15px group-hover:text-design-1"
+        class="h3-sm h3-sm md:h3-lg ml-15px group-hover:text-design-1"
       >
         resume
       </div>

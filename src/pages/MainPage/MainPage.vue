@@ -1,8 +1,8 @@
 <template>
   <div
-    class="flex flex-col gap-3rem justify-center items-center sm:w-sm md:w-md h-full px-24px"
+    class="flex flex-col gap-3rem justify-center items-center w-sm md:w-md h-full px-24px"
   >
-    <div class="text-design-4 sm:h2-sm md:h2-lg">pomodoro</div>
+    <div class="text-design-4 h2-sm md:h2-lg">pomodoro</div>
     <pomodoro-pills
       :timer-type="timerStore.timerType"
       @initTimer="initTimer"
