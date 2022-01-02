@@ -20,7 +20,7 @@
     />
 
     <div
-      v-if="timerStore.showCompletedPomodoros"
+      v-if="timerStore.showCompletedPomodoros && timerStore.sessions"
       class="grid grid-cols-6 gap-2 justify-center mt-[-10px]"
     >
       <div
