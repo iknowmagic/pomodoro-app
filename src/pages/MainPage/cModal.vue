@@ -6,15 +6,24 @@
       ref="modalRef"
       class="w-sm h-full z-10 flex flex-col items-center p-24px"
     >
-      <div class="bg-design-6 rounded-15px h-575px w-full">
-        <div class="flex flex-row justify-between px-8 py-6">
-          <div class="h2-sm">Settings</div>
-          <div class="cursor-pointer" @click="modalStore.modalVisible = false">
-            <img src="@/assets/icon-close.svg" alt="close" />
+      <div class="bg-design-6 relative rounded-15px h-full w-full min-h-sm">
+        <div class="absolute w-full">
+          <div class="flex flex-row justify-between px-8 py-6">
+            <div class="h2-sm">Settings</div>
+            <div
+              class="cursor-pointer"
+              @click="modalStore.modalVisible = false"
+            >
+              <img src="@/assets/icon-close.svg" alt="close" />
+            </div>
           </div>
+          <div class="bg-design-4 h-[1px] w-full"></div>
         </div>
-        <div class="bg-design-4 h-[1px] w-full"></div>
-        <div class="px-8 py-6 gap-18px grid">
+
+        <div
+          class="px-8 py-6 gap-18px grid mt-[80px] overflow-y-auto"
+          style="height: calc(100% - 100px)"
+        >
           <div class="h4-sm text-center">Time (minutes)</div>
           <div class="grid gap-2">
             <input-number v-model:value="pomodoroValue" label="pomodoro" />
@@ -30,6 +39,18 @@
           <div class="bg-design-4 h-[1px] w-full"></div>
           <div class="h4-sm text-center">Color</div>
           <color-selector v-model:theme-color="tempThemeColor" />
+          <div class="bg-design-4 h-[1px] w-full"></div>
+          <div class="h4-sm text-center">Advanced</div>
+          <div class="flex flex-col gap-2">
+            <toggle-switch
+              v-model:active="tempShowSeconds"
+              label="show seconds"
+            />
+            <toggle-switch
+              v-model:active="tempShowCompletedPomodoros"
+              label="show completed pomodors"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -54,13 +75,14 @@ import { onClickOutside } from '@vueuse/core'
 import { useModalStore, useThemeStore, useTimerStore } from '@/store'
 
 import InputNumber from '@/components/InputNumber'
+import ToggleSwitch from '@/components/ToggleSwitch'
 
 import ColorSelector from './ColorSelector.vue'
 import FontSelector from './FontSelector.vue'
 
 export default defineComponent({
   name: 'CModal',
-  components: { InputNumber, ColorSelector, FontSelector },
+  components: { InputNumber, ToggleSwitch, ColorSelector, FontSelector },
   setup() {
     const pause = inject('pause') as () => null
     const reset = inject('reset') as () => null
@@ -70,6 +92,9 @@ export default defineComponent({
     const modalStore = useModalStore()
     const timerStore = useTimerStore()
     const themeStore = useThemeStore()
+
+    const tempShowSeconds = ref(timerStore.showSeconds)
+    const tempShowCompletedPomodoros = ref(timerStore.showCompletedPomodoros)
 
     const tempThemeFont = ref(themeStore.themeFont)
     const tempThemeColor = ref(themeStore.themeColor)
@@ -92,6 +117,9 @@ export default defineComponent({
       themeStore.themeFont = tempThemeFont.value
       themeStore.themeColor = tempThemeColor.value
 
+      timerStore.showSeconds = tempShowSeconds.value
+      timerStore.showCompletedPomodoros = tempShowCompletedPomodoros.value
+
       document.documentElement.style.setProperty(
         '--theme-color',
         `var(--${themeStore.themeColor})`
@@ -111,6 +139,9 @@ export default defineComponent({
     })
 
     return {
+      tempShowSeconds,
+      tempShowCompletedPomodoros,
+
       pomodoroValue,
       shortBreakValue,
       longBreakValue,

@@ -2,6 +2,8 @@ import { useStorage } from '@vueuse/core'
 
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
+import { use } from 'chai'
+
 import { SimpleObject } from '@/types'
 
 export const useTimerStore = defineStore('useTimerStore', {
@@ -19,9 +21,15 @@ export const useTimerStore = defineStore('useTimerStore', {
       localStorage
     ),
     timer: useStorage('timer', 60 * 25, localStorage),
-    showSeconds: useStorage('showSeconds', false, localStorage),
     auto: useStorage('auto', true, localStorage),
-    percentage: 0
+    percentage: 0,
+
+    showSeconds: useStorage('showSeconds', false, localStorage),
+    showCompletedPomodoros: useStorage(
+      'showCompletedPomodoros',
+      true,
+      localStorage
+    )
   })
 })
 

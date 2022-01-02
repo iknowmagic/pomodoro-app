@@ -4,7 +4,8 @@ import { SimpleObject } from '@/types'
 
 export const useModalStore = defineStore('useModalStore', {
   state: (): SimpleObject => ({
-    modalVisible: false
+    modalVisible: false,
+
   })
 })
 

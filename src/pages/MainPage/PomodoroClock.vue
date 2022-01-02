@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group cursor-pointer bg-design-8 g-1 rounded-full w-312px h-312px flex flex-col justify-center items-center ml-[-5px]"
+    class="group cursor-pointer bg-design-8 g-1 rounded-full w-312px h-312px min-h-312px min-w-312px flex flex-col justify-center items-center ml-[-5px]"
     style="
       background: linear-gradient(315deg, #2e325a 0%, #0e112a 100%);
       box-shadow: -50px -50px 100px #272c5a, 50px 50px 100px #121530;
@@ -30,6 +30,7 @@
       </c-fitty>
 
       <div
+        v-if="showCompletedPomodoros"
         :class="[
           'h4-sm ml-10px',
           { 'text-gray-500': timerType !== 'pomodoro' }
@@ -62,6 +63,11 @@ export default defineComponent({
     isActive: {
       type: Boolean,
       default: false
+    },
+
+    showCompletedPomodoros: {
+      type: Boolean,
+      default: true
     },
     pomodoros: {
       type: Number,

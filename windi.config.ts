@@ -20,6 +20,9 @@ export default defineConfig({
     colors: {
       gray: colors.gray,
       dark: colors.dark,
+      blue: colors.blue,
+      sky: colors.sky,
+      'blue-gray': colors.blueGray,
       design: {
         theme: 'var(--theme-color)',
         '1': '#F87070',

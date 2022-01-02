@@ -15,11 +15,15 @@
       :timer-to-time="timerToTime.toString()"
       :sp-font="spFont"
       :percentage="timerStore.percentage"
+      :show-completed-pomodoros="timerStore.showCompletedPomodoros"
       @pause="pause"
       @resume="resume"
     />
 
-    <div class="grid grid-cols-6 gap-2 justify-center h-2">
+    <div
+      v-if="timerStore.showCompletedPomodoros"
+      class="grid grid-cols-6 gap-2 justify-center mt-[-10px]"
+    >
       <div
         v-for="n in timerStore.sessions"
         :key="n"
