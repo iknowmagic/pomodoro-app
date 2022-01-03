@@ -54,6 +54,7 @@
           <div class="grid md:grid-cols-2 items-center gap-4">
             <div class="h4-sm md:h4-lg text-center md:text-left">Advanced</div>
             <div class="grid grid-rows-3 gap-2">
+              <toggle-switch v-model:active="tempAutoMode" label="auto mode" />
               <toggle-switch
                 v-model:active="tempShowSeconds"
                 label="show seconds"
@@ -114,6 +115,7 @@ export default defineComponent({
     const timerStore = useTimerStore()
     const themeStore = useThemeStore()
 
+    const tempAutoMode = ref(timerStore.autoMode)
     const tempShowSeconds = ref(timerStore.showSeconds)
     const tempShowCompletedPomodoros = ref(timerStore.showCompletedPomodoros)
 
@@ -140,6 +142,7 @@ export default defineComponent({
       themeStore.themeFont = tempThemeFont.value
       themeStore.themeColor = tempThemeColor.value
 
+      timerStore.autoMode = tempAutoMode.value
       timerStore.showSeconds = tempShowSeconds.value
       timerStore.showCompletedPomodoros = tempShowCompletedPomodoros.value
 
@@ -162,6 +165,7 @@ export default defineComponent({
     })
 
     return {
+      tempAutoMode,
       tempShowSeconds,
       tempShowCompletedPomodoros,
 

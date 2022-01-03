@@ -16,7 +16,7 @@
       :percentage="timerStore.percentage"
       :show-completed-pomodoros="timerStore.showCompletedPomodoros"
       @pause="pause"
-      @resume="resume"
+      @resume="timerStore.percentage === 0 ? start() : resume()"
     />
 
     <div

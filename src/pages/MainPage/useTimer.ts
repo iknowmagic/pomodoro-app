@@ -12,7 +12,8 @@ const useTimer = () => {
   const updatePercentage = () => {
     const duration = timerStore.timerMap[timerStore.timerType].duration
     timerStore.percentage = Math.floor(
-      ((timerStore.timer || duration) / duration) * 100
+      // ((timerStore.timer || duration) / duration) * 100
+      (timerStore.timer / duration) * 100
     )
   }
 
@@ -23,10 +24,15 @@ const useTimer = () => {
       timerStore.timer--
       if (timerStore.timer <= 0) {
         timerStore.timer = 0
-        nextTimer()
+        if (timerStore.autoMode) {
+          nextTimer()
+        }
       }
       updatePercentage()
       renderFavicon()
+      if (!timerStore.autoMode && timerStore.timer <= 0) {
+        pause()
+      }
     },
     1000,
     { immediate: false }
@@ -84,9 +90,7 @@ const useTimer = () => {
     timerStore.timerType = type
     updateTimer()
     updatePercentage()
-    if (timerStore.auto) {
-      resume()
-    }
+    resume()
   }
 
   const updateTimer = () => {
@@ -94,8 +98,9 @@ const useTimer = () => {
   }
 
   const start = () => {
+    console.log('hello')
     updateTimer()
-    resume()
+    initTimer(timerStore.timerType)
   }
 
   const reset = () => {

@@ -21,13 +21,13 @@ export const useTimerStore = defineStore('useTimerStore', {
       localStorage
     ),
     timer: useStorage('timer', 60 * 25, localStorage),
-    auto: useStorage('auto', true, localStorage),
     percentage: 0,
 
-    showSeconds: useStorage('showSeconds', false, localStorage),
+    autoMode: useStorage('autoMode', true, localStorage),
+    showSeconds: useStorage('showSeconds', true, localStorage),
     showCompletedPomodoros: useStorage(
       'showCompletedPomodoros',
-      true,
+      false,
       localStorage
     )
   })

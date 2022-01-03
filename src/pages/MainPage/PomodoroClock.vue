@@ -51,7 +51,8 @@
           { 'tracking-[10px]': spFont === 'h1-serif' }
         ]"
       >
-        resume
+        <div v-if="percentage">resume</div>
+        <div v-else>restart</div>
       </div>
     </div>
   </div>
@@ -75,7 +76,6 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-
     showCompletedPomodoros: {
       type: Boolean,
       default: true
@@ -108,14 +108,14 @@ export default defineComponent({
     const progressBarStyle = computed(() => {
       if (mq.sm.value) {
         return `
-          background-image: url('${drawCircle(props.percentage)}');
+          background-image: url('${drawCircle(props.percentage || 100)}');
           background-repeat: no-repeat;
           background-size: 275px 275px;
           background-position: center center;
           `
       }
       return `
-          background-image: url('${drawCircle(props.percentage)}');
+          background-image: url('${drawCircle(props.percentage || 100)}');
           background-repeat: no-repeat;
           background-size: 366px 366px;
           background-position: center center;
