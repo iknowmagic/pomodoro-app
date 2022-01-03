@@ -6,7 +6,9 @@
       ref="modalRef"
       class="w-sm md:w-540px z-10 flex flex-col items-center p-24px md:p-0"
     >
-      <div class="bg-design-6 relative rounded-15px h-full w-full min-h-full">
+      <div
+        class="bg-design-6 relative rounded-15px h-full w-full min-h-full pb-2"
+      >
         <div class="absolute w-full">
           <div class="flex flex-row justify-between items-center px-8 py-6">
             <div class="h2-sm md:h2-lg">Settings</div>

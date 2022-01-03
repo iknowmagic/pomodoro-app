@@ -8,6 +8,7 @@
         type="number"
         class="bg-transparent w-full text-14px font-bold leading-14px"
         min="1"
+        @change="change"
       />
       <div class="grid grid-rows-2">
         <button
@@ -36,6 +37,8 @@ import { useVModel } from '@vueuse/core'
 
 import uniqid from 'uniqid'
 
+import { SimpleObject } from '@/types'
+
 export default defineComponent({
   name: 'InputNumber',
   props: {
@@ -53,7 +56,7 @@ export default defineComponent({
     const currentValue = useVModel(props, 'value', emit)
 
     const decrement = () => {
-      if (currentValue.value > 0) {
+      if (currentValue.value > 1) {
         currentValue.value--
       }
     }
@@ -61,12 +64,19 @@ export default defineComponent({
       currentValue.value++
     }
 
+    const change = () => {
+      if (currentValue.value <= 0) {
+        currentValue.value = 1
+      }
+    }
+
     return {
       id,
+      currentValue,
 
       decrement,
       increment,
-      currentValue
+      change
     }
   }
 })
