@@ -53,7 +53,7 @@
           <div class="bg-design-4 h-[1px] w-full"></div>
           <div class="grid md:grid-cols-2 items-center gap-4">
             <div class="h4-sm md:h4-lg text-center md:text-left">Advanced</div>
-            <div class="grid grid-rows-2 gap-2">
+            <div class="grid grid-rows-3 gap-2">
               <toggle-switch
                 v-model:active="tempShowSeconds"
                 label="show seconds"
@@ -62,6 +62,7 @@
                 v-model:active="tempShowCompletedPomodoros"
                 label="show completed pomodors"
               />
+              <check-box v-model:checked="checkReset" label="reset" />
             </div>
           </div>
         </div>
@@ -87,6 +88,7 @@ import { onClickOutside } from '@vueuse/core'
 
 import { useModalStore, useThemeStore, useTimerStore } from '@/store'
 
+import CheckBox from '@/components/CheckBox'
 import InputNumber from '@/components/InputNumber'
 import ToggleSwitch from '@/components/ToggleSwitch'
 
@@ -95,7 +97,13 @@ import FontSelector from './FontSelector.vue'
 
 export default defineComponent({
   name: 'CModal',
-  components: { InputNumber, ToggleSwitch, ColorSelector, FontSelector },
+  components: {
+    InputNumber,
+    CheckBox,
+    ToggleSwitch,
+    ColorSelector,
+    FontSelector
+  },
   setup() {
     const pause = inject('pause') as () => null
     const reset = inject('reset') as () => null
@@ -115,6 +123,8 @@ export default defineComponent({
     const pomodoroValue = ref(timerStore.timerMap.pomodoro.duration / 60)
     const shortBreakValue = ref(timerStore.timerMap.shortBreak.duration / 60)
     const longBreakValue = ref(timerStore.timerMap.longBreak.duration / 60)
+
+    const checkReset = ref(false)
 
     watch(pomodoroValue, () => {
       needsReset.value = true
@@ -139,7 +149,7 @@ export default defineComponent({
       )
 
       pause()
-      if (needsReset.value) {
+      if (needsReset.value || checkReset.value) {
         reset()
       }
 
@@ -158,6 +168,7 @@ export default defineComponent({
       pomodoroValue,
       shortBreakValue,
       longBreakValue,
+      checkReset,
 
       applySettings,
       modalStore,
