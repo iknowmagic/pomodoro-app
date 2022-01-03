@@ -98,7 +98,6 @@ const useTimer = () => {
   }
 
   const start = () => {
-    console.log('hello')
     updateTimer()
     initTimer(timerStore.timerType)
   }
