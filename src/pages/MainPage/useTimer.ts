@@ -8,7 +8,6 @@ import drawCircle from './favicons'
 
 const useTimer = () => {
   const timerStore = useTimerStore()
-  timerStore.showSeconds = true
 
   const updatePercentage = () => {
     const duration = timerStore.timerMap[timerStore.timerType].duration

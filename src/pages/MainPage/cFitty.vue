@@ -1,5 +1,14 @@
 <template>
-  <div class="w-200px md:w-260px flex justify-center text-center">
+  <div
+    :class="[
+      'w-200px',
+      { 'md:w-260px': !active },
+      { 'md:w-200px': active },
+      'flex',
+      'justify-center',
+      'text-center'
+    ]"
+  >
     <div :id="id">
       <slot />
     </div>
