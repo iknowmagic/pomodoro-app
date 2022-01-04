@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col gap-3rem justify-start items-center w-sm md:w-md h-full px-36px"
+    class="flex flex-col gap-3rem justify-start items-center w-sm md:w-md h-full px-20px"
   >
     <header>
       <h1 class="text-design-4 h2-sm md:h2-lg mt-11.5 mb-2.7">pomodoro</h1>

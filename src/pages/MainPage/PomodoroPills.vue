@@ -7,7 +7,7 @@
       v-for="pomodoro in pomodoros"
       :key="pomodoro.timerType"
       :class="[
-        'cursor-pointer p-1.1rem tracking-[-1px] md:tracking-normal',
+        'cursor-pointer p-1.1rem tracking-[-1px] md:tracking-normal mt-[-3px]',
         { 'pill-selected': timerType === pomodoro.timerType }
       ]"
       @click="initTimer(pomodoro.timerType)"
