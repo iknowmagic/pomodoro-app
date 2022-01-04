@@ -1,8 +1,8 @@
 <template>
   <main
-    class="flex flex-col gap-3rem justify-center items-center w-sm md:w-md h-full px-36px"
+    class="flex flex-col gap-3rem justify-start items-center w-sm md:w-md h-full px-36px"
   >
-    <h1 class="text-design-4 h2-sm md:h2-lg mt-[-0.5rem] mb-2">pomodoro</h1>
+    <h1 class="text-design-4 h2-sm md:h2-lg mt-11.5 mb-2.7">pomodoro</h1>
     <pomodoro-pills
       :timer-type="timerStore.timerType"
       @initTimer="initTimer"
@@ -30,7 +30,7 @@
       ></div>
     </div>
     <div
-      class="cursor-pointer opacity-40 hover:opacity-80 mt-3"
+      class="cursor-pointer opacity-40 hover:opacity-80 mt-4"
       @click="modalStore.modalVisible = true"
     >
       <img src="@/assets/icon-settings.svg" alt="settings" />

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group cursor-pointer g-1 rounded-full w-312px h-312px md:w-410px md:h-410px min-h-312px min-w-312px flex flex-col justify-center items-center ml-[-5px]"
+    class="m-[-4px] group cursor-pointer g-1 rounded-full w-312px h-312px md:w-410px md:h-410px min-h-312px min-w-312px flex flex-col justify-center items-center ml-[-5px]"
     style="
       background: linear-gradient(315deg, #2e325a 0%, #0e112a 100%);
       box-shadow: -50px -50px 100px #272c5a, 50px 50px 100px #121530;
@@ -16,8 +16,8 @@
       <c-fitty
         :active="timerToTime.toString().length !== 5"
         :class="[
-          'mt-[-23px]',
-          'ml-[-5px]',
+          'mt-[-8px]',
+          'ml-[-8px]',
           `pt-8 h1-sm h1-sm md:h1-lg`,
           { 'leading-106px tracking-[0px]': spFont === 'h1-serif' },
           { 'font-normal tracking-[-6px]': spFont === 'h1-mono' },
@@ -54,6 +54,7 @@
           'h3-sm',
           'md:h3-lg',
           'ml-15px',
+          'mt-3px',
           'group-hover:text-design-theme',
           { 'tracking-[10px]': spFont === 'h1-serif' }
         ]"
