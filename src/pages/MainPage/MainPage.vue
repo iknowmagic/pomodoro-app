@@ -1,50 +1,56 @@
 <template>
-  <main
+  <div
     class="flex flex-col gap-3rem justify-start items-center w-sm md:w-md h-full px-36px"
   >
-    <h1 class="text-design-4 h2-sm md:h2-lg mt-11.5 mb-2.7">pomodoro</h1>
-    <pomodoro-pills
-      :timer-type="timerStore.timerType"
-      @initTimer="initTimer"
-    />
-    <pomodoro-clock
-      :is-active="isActive"
-      :pomodoros="timerStore.pomodoros"
-      :timer-type="timerStore.timerType"
-      :timer-to-time="timerToTime.toString()"
-      :sp-font="spFont"
-      :percentage="timerStore.percentage"
-      :show-completed-pomodoros="timerStore.showCompletedPomodoros"
-      @pause="pause"
-      @resume="timerStore.percentage === 0 ? start() : resume()"
-    />
+    <header>
+      <h1 class="text-design-4 h2-sm md:h2-lg mt-11.5 mb-2.7">pomodoro</h1>
+    </header>
+    <nav>
+      <pomodoro-pills
+        :timer-type="timerStore.timerType"
+        @initTimer="initTimer"
+      />
+    </nav>
+    <main>
+      <pomodoro-clock
+        :is-active="isActive"
+        :pomodoros="timerStore.pomodoros"
+        :timer-type="timerStore.timerType"
+        :timer-to-time="timerToTime.toString()"
+        :sp-font="spFont"
+        :percentage="timerStore.percentage"
+        :show-completed-pomodoros="timerStore.showCompletedPomodoros"
+        @pause="pause"
+        @resume="timerStore.percentage === 0 ? start() : resume()"
+      />
 
-    <div
-      v-if="timerStore.showCompletedPomodoros && timerStore.sessions"
-      class="grid grid-cols-6 gap-2 justify-center mt-[-10px]"
-    >
       <div
-        v-for="n in timerStore.sessions"
-        :key="n"
-        class="bg-design-theme w-2 h-2 rounded"
-      ></div>
-    </div>
-    <div
-      class="cursor-pointer opacity-40 hover:opacity-80 mt-4"
-      @click="modalStore.modalVisible = true"
-    >
-      <img src="@/assets/icon-settings.svg" alt="settings" />
-    </div>
-  </main>
+        v-if="timerStore.showCompletedPomodoros && timerStore.sessions"
+        class="grid grid-cols-6 gap-2 justify-center mt-[-10px]"
+      >
+        <div
+          v-for="n in timerStore.sessions"
+          :key="n"
+          class="bg-design-theme w-2 h-2 rounded"
+        ></div>
+      </div>
+    </main>
+    <footer>
+      <div
+        class="cursor-pointer opacity-40 hover:opacity-80 mt-4"
+        @click="modalStore.modalVisible = true"
+      >
+        <img src="@/assets/icon-settings.svg" alt="settings" />
+      </div>
+    </footer>
+  </div>
   <c-modal v-if="modalStore.modalVisible" />
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, provide, ref, watch } from 'vue'
+import { defineComponent, provide, ref, watch } from 'vue'
 
 import { useModalStore, useThemeStore, useTimerStore } from '@/store'
-
-import { SimpleObject } from '@/types'
 
 import cModal from './cModal.vue'
 import drawCircle from './favicons'

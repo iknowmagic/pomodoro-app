@@ -16,7 +16,8 @@
       <c-fitty
         :active="timerToTime.toString().length !== 5"
         :class="[
-          'mt-[-8px]',
+          { 'mt-[-8px]': timerToTime.toString().length !== 2 },
+          { 'mb-5 w-100px': timerToTime.toString().length === 2 },
           'ml-[-8px]',
           `pt-8 h1-sm h1-sm md:h1-lg`,
           { 'leading-106px tracking-[0px]': spFont === 'h1-serif' },
