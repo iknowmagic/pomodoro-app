@@ -37,7 +37,12 @@
       </div>
       <div
         v-if="isActive"
-        :class="['h3-sm', 'md:h3-lg', 'ml-15px', 'group-hover:text-design-1']"
+        :class="[
+          'h3-sm',
+          'md:h3-lg',
+          'ml-15px',
+          'group-hover:text-design-theme'
+        ]"
       >
         pause
       </div>
@@ -47,7 +52,7 @@
           'h3-sm',
           'md:h3-lg',
           'ml-15px',
-          'group-hover:text-design-1',
+          'group-hover:text-design-theme',
           { 'tracking-[10px]': spFont === 'h1-serif' }
         ]"
       >
