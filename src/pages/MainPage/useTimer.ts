@@ -90,7 +90,11 @@ const useTimer = () => {
     timerStore.timerType = type
     updateTimer()
     updatePercentage()
-    resume()
+    if (timerStore.autoMode) {
+      resume()
+    } else {
+      pause()
+    }
   }
 
   const updateTimer = () => {
