@@ -5,7 +5,7 @@
     <header>
       <h1 class="text-design-4 h2-sm md:h2-lg mt-11.5 mb-2.7">pomodoro</h1>
     </header>
-    <nav>
+    <nav class="z-1">
       <pomodoro-pills
         :timer-type="timerStore.timerType"
         @initTimer="initTimer"
