@@ -109,6 +109,7 @@ const useTimer = () => {
   const reset = () => {
     timerStore.timer = timerStore.timerMap[timerStore.timerType].duration
     updatePercentage()
+    localStorage.setItem('timerActive', 'false')
   }
 
   // Save timer state before unload
@@ -129,8 +130,13 @@ const useTimer = () => {
     updatePercentage()
   }
 
-  if (savedTimerActive === 'true') {
+  // Determine if we should display 'Resume' or 'Play'
+  if (savedTimerActive === 'true' && timerStore.timer > 0) {
     isActive.value = false // Timer is not running until user clicks "Resume"
+    // Do not update 'timerActive' in localStorage here
+  } else if (timerStore.timer <= 0) {
+    // If the timer has completed, ensure 'timerActive' is false
+    localStorage.setItem('timerActive', 'false')
   }
 
   return {

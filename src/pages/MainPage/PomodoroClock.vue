@@ -1,6 +1,6 @@
 <template>
   <div
-    class="m-[-4px] group cursor-pointer g-1 rounded-full w-312px h-312px md:w-410px md:h-410px min-h-312px min-w-312px flex flex-col justify-center items-center ml-[-5px]"
+    class="m-[-4px] group g-1 rounded-full w-312px h-312px md:w-410px md:h-410px min-h-312px min-w-312px flex flex-col justify-center items-center ml-[-5px]"
     style="
       background: linear-gradient(315deg, #2e325a 0%, #0e112a 100%);
       box-shadow: -50px -50px 100px #272c5a, 50px 50px 100px #121530;
@@ -42,7 +42,7 @@
       >
         <div v-if="isActive">stop</div>
         <div v-else>
-          <div v-if="isReloaded">resume</div>
+          <div v-if="shouldResume">resume</div>
           <div v-else>play</div>
         </div>
       </div>
@@ -114,29 +114,30 @@ export default defineComponent({
           `
     })
 
-    const isReloaded = ref(false)
+    const shouldResume = ref(false)
 
     // Check if the timer was active before page reload
-    if (
-      localStorage.getItem('timerActive') === 'true' &&
-      !props.isActive &&
-      parseInt(localStorage.getItem('timer'), 10) > 0
-    ) {
-      isReloaded.value = true
+    const savedTimerActive = localStorage.getItem('timerActive')
+    const savedTimer = parseInt(localStorage.getItem('timer') || '0', 10)
+
+    if (savedTimerActive === 'true' && !props.isActive && savedTimer > 0) {
+      shouldResume.value = true
     }
 
     const handleClick = () => {
       if (props.isActive) {
         emit('stop')
+        shouldResume.value = false
       } else {
         emit('start')
+        shouldResume.value = false
       }
     }
 
     return {
       mq,
       progressBarStyle,
-      isReloaded,
+      shouldResume,
       handleClick
     }
   }
