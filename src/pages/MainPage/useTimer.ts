@@ -1,9 +1,6 @@
-import { computed, ref } from 'vue'
-
-import { useIntervalFn } from '@vueuse/core'
-
 import { useTimerStore } from '@/store'
-
+import { useIntervalFn } from '@vueuse/core'
+import { computed, ref } from 'vue'
 import drawCircle from './favicons'
 
 const useTimer = () => {
@@ -35,9 +32,11 @@ const useTimer = () => {
     { immediate: false }
   )
 
+  // Ensure the interval is paused upon initialization
+  pauseInterval()
+
   const renderFavicon = () => {
     const favicon = document.getElementById('favicon')
-
     if (favicon) {
       // @ts-expect-error favicon
       favicon.href = drawCircle(timerStore.percentage, {
@@ -50,7 +49,6 @@ const useTimer = () => {
   const nextTimer = () => {
     if (timerStore.timerType === 'pomodoro') {
       timerStore.sessions++
-
       if (timerStore.pomodoros < 4) {
         timerStore.pomodoros++
         initTimer('shortBreak')
@@ -109,6 +107,8 @@ const useTimer = () => {
   const reset = () => {
     timerStore.timer = timerStore.timerMap[timerStore.timerType].duration
     updatePercentage()
+    pauseInterval()
+    isActive.value = false
     localStorage.setItem('timerActive', 'false')
   }
 
@@ -116,7 +116,7 @@ const useTimer = () => {
   window.addEventListener('beforeunload', () => {
     localStorage.setItem('timer', timerStore.timer.toString())
     localStorage.setItem('timerType', timerStore.timerType)
-    localStorage.setItem('timerActive', isActive.value.toString())
+    // Do not update 'timerActive' here
   })
 
   // Restore timer state on load
