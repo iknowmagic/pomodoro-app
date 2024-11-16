@@ -11,7 +11,6 @@
       :style="progressBarStyle"
       role="progressbar"
       aria-label="progress bar"
-      @click="isActive ? pause() : resume()"
     >
       <c-fitty
         :active="timerToTime.toString().length !== 5"
@@ -30,45 +29,29 @@
       </c-fitty>
 
       <div
-        v-if="showCompletedPomodoros"
-        :class="[
-          'h4-sm ml-10px',
-          { 'text-gray-500': timerType !== 'pomodoro' }
-        ]"
+        v-if="showCompletedPomodoros && pomodoros"
+        class="h4-sm ml-10px"
+        :class="{ 'text-gray-500': timerType !== 'pomodoro' }"
       >
         {{ pomodoros }} / 4
       </div>
+
       <div
-        v-if="isActive"
-        :class="[
-          'h3-sm',
-          'md:h3-lg',
-          'ml-15px',
-          'group-hover:text-design-theme'
-        ]"
+        class="h3-sm md:h3-lg ml-15px mt-3px group-hover:text-design-theme cursor-pointer"
+        @click="handleClick"
       >
-        pause
-      </div>
-      <div
-        v-if="!isActive"
-        :class="[
-          'h3-sm',
-          'md:h3-lg',
-          'ml-15px',
-          'mt-3px',
-          'group-hover:text-design-theme',
-          { 'tracking-[10px]': spFont === 'h1-serif' }
-        ]"
-      >
-        <div v-if="percentage">resume</div>
-        <div v-else>restart</div>
+        <div v-if="isActive">stop</div>
+        <div v-else>
+          <div v-if="isReloaded">resume</div>
+          <div v-else>play</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject } from 'vue'
+import { computed, defineComponent, inject, ref } from 'vue'
 
 import { SimpleObject } from '@/types'
 
@@ -110,7 +93,7 @@ export default defineComponent({
       default: 0
     }
   },
-  emits: ['pause', 'resume'],
+  emits: ['start', 'stop'],
   setup(props, { emit }) {
     const mq = inject('mq') as SimpleObject
 
@@ -131,20 +114,30 @@ export default defineComponent({
           `
     })
 
-    const pause = () => {
-      emit('pause')
+    const isReloaded = ref(false)
+
+    // Check if the timer was active before page reload
+    if (
+      localStorage.getItem('timerActive') === 'true' &&
+      !props.isActive &&
+      parseInt(localStorage.getItem('timer'), 10) > 0
+    ) {
+      isReloaded.value = true
     }
 
-    const resume = () => {
-      emit('resume')
+    const handleClick = () => {
+      if (props.isActive) {
+        emit('stop')
+      } else {
+        emit('start')
+      }
     }
 
     return {
-      pause,
-      resume,
-
       mq,
-      progressBarStyle
+      progressBarStyle,
+      isReloaded,
+      handleClick
     }
   }
 })

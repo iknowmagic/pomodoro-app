@@ -20,8 +20,8 @@
         :sp-font="spFont"
         :percentage="timerStore.percentage"
         :show-completed-pomodoros="timerStore.showCompletedPomodoros"
-        @pause="pause"
-        @resume="timerStore.percentage === 0 ? start() : resume()"
+        @start="startTimer"
+        @stop="stopTimer"
       />
 
       <div
@@ -53,7 +53,6 @@ import { defineComponent, provide, ref, watch } from 'vue'
 import { useModalStore, useThemeStore, useTimerStore } from '@/store'
 
 import cModal from './cModal.vue'
-import drawCircle from './favicons'
 import PomodoroClock from './PomodoroClock.vue'
 import PomodoroPills from './PomodoroPills.vue'
 import useTimer from './useTimer'
@@ -67,14 +66,12 @@ export default defineComponent({
   },
 
   setup() {
-    const { timerToTime, pause, resume, reset, start, isActive, initTimer } =
-      useTimer()
+    const { timerToTime, start, stop, reset, isActive, initTimer } = useTimer()
 
     const modalStore = useModalStore()
     const timerStore = useTimerStore()
     const themeStore = useThemeStore()
 
-    provide('pause', pause)
     provide('reset', reset)
 
     const spFont = ref(`h1-${themeStore.themeFont}`)
@@ -83,21 +80,28 @@ export default defineComponent({
       spFont.value = `h1-${themeStore.themeFont}`
     })
 
+    const startTimer = () => {
+      start()
+    }
+
+    const stopTimer = () => {
+      stop()
+      reset()
+    }
+
     return {
       timerToTime,
-      resume,
-      pause,
-      start,
       isActive,
       initTimer,
-
-      drawCircle,
 
       modalStore,
       timerStore,
       themeStore,
 
-      spFont
+      spFont,
+
+      startTimer,
+      stopTimer
     }
   }
 })

@@ -2,13 +2,11 @@ import { useStorage } from '@vueuse/core'
 
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
-import { use } from 'chai'
-
 import { SimpleObject } from '@/types'
 
 export const useTimerStore = defineStore('useTimerStore', {
   state: (): SimpleObject => ({
-    timerType: useStorage('pomodoro', 'pomodoro', localStorage),
+    timerType: useStorage('timerType', 'pomodoro', localStorage),
     pomodoros: useStorage('pomodoros', 1, localStorage),
     sessions: useStorage('sessions', 0, localStorage),
     timerMap: useStorage(

@@ -151,7 +151,6 @@ export default defineComponent({
         `var(--${themeStore.themeColor})`
       )
 
-      pause()
       if (needsReset.value || checkReset.value) {
         reset()
       }

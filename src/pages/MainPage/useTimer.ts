@@ -1,4 +1,4 @@
-import { computed, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 import { useIntervalFn } from '@vueuse/core'
 
@@ -9,30 +9,27 @@ import drawCircle from './favicons'
 const useTimer = () => {
   const timerStore = useTimerStore()
 
+  const isActive = ref(false)
+
   const updatePercentage = () => {
     const duration = timerStore.timerMap[timerStore.timerType].duration
-    timerStore.percentage = Math.floor(
-      // ((timerStore.timer || duration) / duration) * 100
-      (timerStore.timer / duration) * 100
-    )
+    timerStore.percentage = Math.floor((timerStore.timer / duration) * 100)
   }
 
   updatePercentage()
 
-  const { pause, resume, isActive } = useIntervalFn(
+  const { pause: pauseInterval, resume: resumeInterval } = useIntervalFn(
     () => {
       timerStore.timer--
       if (timerStore.timer <= 0) {
         timerStore.timer = 0
+        stop()
         if (timerStore.autoMode) {
           nextTimer()
         }
       }
       updatePercentage()
       renderFavicon()
-      if (!timerStore.autoMode && timerStore.timer <= 0) {
-        pause()
-      }
     },
     1000,
     { immediate: false }
@@ -55,16 +52,13 @@ const useTimer = () => {
       timerStore.sessions++
 
       if (timerStore.pomodoros < 4) {
+        timerStore.pomodoros++
         initTimer('shortBreak')
       } else {
+        timerStore.pomodoros = 1
         initTimer('longBreak')
       }
     } else {
-      if (timerStore.pomodoros === 4) {
-        timerStore.pomodoros = 1
-      } else {
-        timerStore.pomodoros++
-      }
       initTimer('pomodoro')
     }
   }
@@ -79,7 +73,6 @@ const useTimer = () => {
 
     if (timerStore.showSeconds) return minutes + ':' + seconds
 
-    // if minutes = 0 but seconds > 0, display minutes = 1
     return parseInt(seconds.toString()) !== 0 &&
       parseInt(minutes.toString()) === 0
       ? '01'
@@ -91,9 +84,9 @@ const useTimer = () => {
     updateTimer()
     updatePercentage()
     if (timerStore.autoMode) {
-      resume()
+      start()
     } else {
-      pause()
+      stop()
     }
   }
 
@@ -102,23 +95,48 @@ const useTimer = () => {
   }
 
   const start = () => {
-    updateTimer()
-    initTimer(timerStore.timerType)
+    isActive.value = true
+    resumeInterval()
+    localStorage.setItem('timerActive', 'true')
+  }
+
+  const stop = () => {
+    pauseInterval()
+    isActive.value = false
+    localStorage.setItem('timerActive', 'false')
   }
 
   const reset = () => {
-    timerStore.pomodoros = 1
-    timerStore.sessions = 0
-    timerStore.timerType = 'pomodoro'
-    updateTimer()
+    timerStore.timer = timerStore.timerMap[timerStore.timerType].duration
     updatePercentage()
+  }
+
+  // Save timer state before unload
+  window.addEventListener('beforeunload', () => {
+    localStorage.setItem('timer', timerStore.timer.toString())
+    localStorage.setItem('timerType', timerStore.timerType)
+    localStorage.setItem('timerActive', isActive.value.toString())
+  })
+
+  // Restore timer state on load
+  const savedTimer = localStorage.getItem('timer')
+  const savedTimerType = localStorage.getItem('timerType')
+  const savedTimerActive = localStorage.getItem('timerActive')
+
+  if (savedTimer && savedTimerType) {
+    timerStore.timer = parseInt(savedTimer, 10)
+    timerStore.timerType = savedTimerType
+    updatePercentage()
+  }
+
+  if (savedTimerActive === 'true') {
+    isActive.value = false // Timer is not running until user clicks "Resume"
   }
 
   return {
     timerToTime,
-    pause,
-    resume,
     start,
+    stop,
     reset,
     isActive,
     initTimer
