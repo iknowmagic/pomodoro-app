@@ -1,11 +1,46 @@
-# Vue 3 + Typescript + Vite
+# ⏱️ Pomodoro Timer App
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A sleek and customizable Pomodoro timer that lets users manage their focus sessions with adjustable work and break durations. Includes font and color personalization settings, as well as a circular progress bar.
 
-## Recommended IDE Setup
+🔗 **Live Demo**: [https://pomodoro-app-three.vercel.app](https://pomodoro-app-three.vercel.app)
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+---
 
-## Type Support For `.vue` Imports in TS
+## 🧱 Tech Stack
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+- Vue 3 + Vite  
+- TypeScript  
+- Composition API (`<script setup>`)  
+- CSS Variables for theming
+
+---
+
+## 📱 Responsive Previews
+
+| Desktop                     | Mobile                     | Settings Panel             |
+|----------------------------|----------------------------|----------------------------|
+| ![](assets/desktop.png)    | ![](assets/mobile.png)     | ![](assets/settings.png)   |
+
+---
+
+## ✨ Features
+
+- Adjustable Pomodoro, short break, and long break times
+- Theme customization: fonts and colors
+- Circular progress animation
+- Fully responsive across devices
+
+---
+
+## 🛠️ Project Setup
+
+```bash
+yarn install
+yarn dev
+```
+
+### Build for Production
+
+```bash
+yarn build
+```
