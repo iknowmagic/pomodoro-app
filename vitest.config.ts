@@ -1,11 +1,16 @@
-import tailwindcss from '@tailwindcss/vite'
+// this is the main configuration file for vitest, in the project root
+
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './vitest.setup.ts',
+  },
   resolve: {
     alias: [
       {
