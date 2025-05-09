@@ -1,15 +1,72 @@
-<!DOCTYPE html>
-<html lang="en" class="w-full h-full flex flex-col text-base">
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" id="favicon" href="./favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%- title %></title>
-    <base href="<%- base %>" />
-    <%- fonts %>
+    <meta
+      name="description"
+      content="Pomodoro Timer - Stay productive with time management"
+    />
+
+    <!-- Favicon links -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon_io/favicon-16x16.png"
+    />
+    <link rel="icon" href="/favicon_io/favicon.ico" type="image/x-icon" />
+    <link rel="manifest" href="/favicon_io/site.webmanifest" />
+
+    <!-- Primary favicon that will be dynamically updated -->
+    <link
+      id="favicon"
+      rel="icon"
+      href="/favicon_io/favicon.ico"
+      type="image/x-icon"
+    />
+
+    <!-- Primary Meta Tags -->
+    <title>Pomodoro Timer</title>
+    <meta name="theme-color" content="#F87070" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Pomodoro Timer" />
+    <meta
+      property="og:description"
+      content="Boost your productivity with this customizable Pomodoro timer app"
+    />
+    <meta
+      property="og:image"
+      content="/favicon_io/android-chrome-512x512.png"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Pomodoro Timer" />
+    <meta
+      property="twitter:description"
+      content="Boost your productivity with this customizable Pomodoro timer app"
+    />
+    <meta
+      property="twitter:image"
+      content="/favicon_io/android-chrome-512x512.png"
+    />
   </head>
-  <body class="w-full h-full">
-    <div id="app" class="w-full h-full"></div>
-    <script type="module" src="/src/main.ts"></script>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

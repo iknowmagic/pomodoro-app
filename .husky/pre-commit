@@ -1,4 +1,8 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+#!/usr/bin/env sh
 
-yarn lint
+. "$HOME/.nvm/nvm.sh"  # Load nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
+npx lint-staged --config ./lint-staged.config.js
+npx vitest run --silent --passWithNoTests

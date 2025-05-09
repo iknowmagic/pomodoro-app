@@ -1,9 +1,1 @@
-import { App } from 'vue'
-
-import Component from './ToggleSwitch.vue'
-
-Component.install = (Vue: App) => {
-  Vue.component(Component.name, Component)
-}
-
-export default Component
+export { default } from './ToggleSwitch'
