@@ -1,81 +1,151 @@
 @import 'tailwindcss';
+
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
   themes: all;
 }
 
-@plugin "daisyui/theme" {
-  name: 'reactcraft-light';
-  default: true;
-  prefersdark: false;
-  color-scheme: 'light';
-  --color-base-100: oklch(100% 0 0);
-  --color-base-200: oklch(93.299% 0.01 261.788);
-  --color-base-300: oklch(89.925% 0.016 262.749);
-  --color-base-content: oklch(32.437% 0.022 264.182);
-  --color-primary: oklch(59.435% 0.077 254.027);
-  --color-primary-content: oklch(11.887% 0.015 254.027);
-  --color-secondary: oklch(69.651% 0.059 248.687);
-  --color-secondary-content: oklch(13.93% 0.011 248.687);
-  --color-accent: oklch(77.464% 0.062 217.469);
-  --color-accent-content: oklch(15.492% 0.012 217.469);
-  --color-neutral: oklch(45.229% 0.035 264.131);
-  --color-neutral-content: oklch(89.925% 0.016 262.749);
-  --color-info: oklch(69.207% 0.062 332.664);
-  --color-info-content: oklch(13.841% 0.012 332.664);
-  --color-success: oklch(76.827% 0.074 131.063);
-  --color-success-content: oklch(15.365% 0.014 131.063);
-  --color-warning: oklch(85.486% 0.089 84.093);
-  --color-warning-content: oklch(17.097% 0.017 84.093);
-  --color-error: oklch(60.61% 0.12 15.341);
-  --color-error-content: oklch(12.122% 0.024 15.341);
-  --radius-selector: 1rem;
-  --radius-field: 0.5rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
-  --border: 1px;
-  --depth: 0;
-  --noise: 1;
+/* Custom theme variables */
+:root {
+  --design-1: #f87070; /* Red */
+  --design-2: #70f3f8; /* Cyan */
+  --design-3: #d881f8; /* Purple */
+  --theme-color: var(--design-1);
 }
 
-@plugin "daisyui/theme" {
-  name: 'reactcraft-dark';
-  default: false;
-  prefersdark: false;
-  color-scheme: 'dark';
-  --color-base-100: oklch(24.353% 0 0);
-  --color-base-200: oklch(22.648% 0 0);
-  --color-base-300: oklch(20.944% 0 0);
-  --color-base-content: oklch(84.87% 0 0);
-  --color-primary: oklch(41.703% 0.099 251.473);
-  --color-primary-content: oklch(88.34% 0.019 251.473);
-  --color-secondary: oklch(64.092% 0.027 229.389);
-  --color-secondary-content: oklch(12.818% 0.005 229.389);
-  --color-accent: oklch(67.271% 0.167 35.791);
-  --color-accent-content: oklch(13.454% 0.033 35.791);
-  --color-neutral: oklch(27.441% 0.013 253.041);
-  --color-neutral-content: oklch(85.488% 0.002 253.041);
-  --color-info: oklch(62.616% 0.143 240.033);
-  --color-info-content: oklch(12.523% 0.028 240.033);
-  --color-success: oklch(70.226% 0.094 156.596);
-  --color-success-content: oklch(14.045% 0.018 156.596);
-  --color-warning: oklch(77.482% 0.115 81.519);
-  --color-warning-content: oklch(15.496% 0.023 81.519);
-  --color-error: oklch(51.61% 0.146 29.674);
-  --color-error-content: oklch(90.322% 0.029 29.674);
-  --radius-selector: 1rem;
-  --radius-field: 0.5rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
-  --border: 1px;
-  --depth: 0;
-  --noise: 1;
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&family=Roboto+Slab:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
+
+/* Hide number input spinners */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Font families */
+.font-sans {
+  font-family: 'Kumbh Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-serif {
+  font-family: 'Roboto Slab', ui-serif, Georgia, serif;
+}
+
+.font-mono {
+  font-family: 'Space Mono', ui-monospace, monospace;
+}
+
+/* Theme color utility classes */
+.bg-theme-color {
+  background-color: var(--theme-color);
+}
+
+.text-theme-color {
+  color: var(--theme-color);
+}
+
+.border-theme-color {
+  border-color: var(--theme-color);
+}
+
+.ring-theme-color {
+  --tw-ring-color: var(--theme-color);
+}
+
+/* Dark mode improvements */
+.dark {
+  color-scheme: dark;
+}
+
+/* Animatable transition properties */
+.transition-theme {
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Custom spacing utility for pomodoro dots */
+.gap-2px {
+  gap: 2px;
+}
+
+/* Custom scrollbar that's always visible */
+.scrollbar-custom {
+  /* Make scrollbar is always visible in modern browsers */
+  overflow-y: scroll;
+  /* For Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--theme-color) rgba(0, 0, 0, 0.05);
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 10px;
+  /* Ensuring it's always visible */
+  display: block;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  margin: 8px 0;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: var(--theme-color);
+  border-radius: 10px;
+  /* solid/vibrant color */
+  opacity: 1;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-color);
+  filter: brightness(90%);
+}
+
+/* Dark mode adjustments */
+.dark .scrollbar-custom::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Global scrollbar settings - always visible */
+html {
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  display: block;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode scrollbar adjustments */
+.dark ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }

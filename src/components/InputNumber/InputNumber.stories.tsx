@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Navbar from './Navbar'
+import InputNumber from './InputNumber'
 
-const meta: Meta<typeof Navbar> = {
-  title: 'Components/Navbar',
-  component: Navbar,
+const meta: Meta<typeof InputNumber> = {
+  title: 'Components/InputNumber',
+  component: InputNumber,
   tags: ['autodocs'],
 }
 export default meta
 
-type Story = StoryObj<typeof Navbar>
+type Story = StoryObj<typeof InputNumber>
 
 export const Default: Story = {
   args: {
